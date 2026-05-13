@@ -67,6 +67,7 @@
     "electron-updater": "^6.3.9",
     "formidable": "^3.5.2",
     "framer-motion": "^12.4.10",
+    "fs-extra": "^11.3.5",
     "github-markdown-css": "^5.8.1",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.4",
@@ -117,6 +118,7 @@
   "build": {
     "appId": "com.easydataset.app",
     "productName": "Easy Dataset",
+    "npmRebuild": false,
     "files": [
       ".next/**/*",
       "!.next/cache/**/*",
