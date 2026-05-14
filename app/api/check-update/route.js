@@ -35,38 +35,13 @@ async function getLatestVersion() {
 
 // Check for updates
 export async function GET() {
-  try {
-    const currentVersion = getCurrentVersion();
-    const latestVersion = await getLatestVersion();
-
-    if (!latestVersion) {
-      return NextResponse.json({
-        hasUpdate: false,
-        currentVersion,
-        latestVersion: null,
-        error: 'Failed to fetch latest version'
-      });
-    }
-
-    // Simple semver-like comparison
-    const hasUpdate = compareVersions(latestVersion, currentVersion) > 0;
-
-    return NextResponse.json({
-      hasUpdate,
-      currentVersion,
-      latestVersion,
-      releaseUrl: hasUpdate ? `https://github.com/ConardLi/easy-dataset/releases/tag/v${latestVersion}` : null
-    });
-  } catch (error) {
-    console.error('Failed to check for updates:', String(error));
-    return NextResponse.json(
-      {
-        hasUpdate: false,
-        error: 'Failed to check for updates'
-      },
-      { status: 500 }
-    );
-  }
+  // 更新检测已被禁用
+  return NextResponse.json({
+    hasUpdate: false,
+    currentVersion: getCurrentVersion(),
+    latestVersion: null,
+    disabled: true
+  });
 }
 
 // Simple version comparison
