@@ -257,31 +257,43 @@ export default function ChunkListHeader({
             width: { xs: '100%', sm: 'auto' }
           }}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<QuizIcon />}
-            disabled={selectedChunks.length === 0}
-            onClick={onBatchGenerateQuestions}
-            size="medium"
-            sx={{ minWidth: { xs: '48%', sm: 'auto' } }}
-          >
-            {t('textSplit.batchGenerateQuestions')}
-          </Button>
+          <Tooltip
+              title={!selectedModel?.id ? t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' }) : ''}
+            >
+              <span>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<QuizIcon />}
+                  disabled={selectedChunks.length === 0 || !selectedModel?.id}
+                  onClick={onBatchGenerateQuestions}
+                  size="medium"
+                  sx={{ minWidth: { xs: '48%', sm: 'auto' } }}
+                >
+                  {t('textSplit.batchGenerateQuestions')}
+                </Button>
+              </span>
+            </Tooltip>
 
           {/* 自动任务下拉菜单 */}
-          <Button
-            variant="outlined"
-            color="secondary"
-            startIcon={<AutoFixHighIcon />}
-            endIcon={<KeyboardArrowDownIcon />}
-            onClick={handleAutoTasksClick}
-            disabled={!projectId || !selectedModel?.id}
-            size="medium"
-            sx={{ minWidth: { xs: '48%', sm: 'auto' } }}
+          <Tooltip
+            title={!selectedModel?.id ? t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' }) : ''}
           >
-            {t('textSplit.autoTasks', { defaultValue: '自动任务' })}
-          </Button>
+            <span>
+              <Button
+                variant="outlined"
+                color="secondary"
+                startIcon={<AutoFixHighIcon />}
+                endIcon={<KeyboardArrowDownIcon />}
+                onClick={handleAutoTasksClick}
+                disabled={!projectId || !selectedModel?.id}
+                size="medium"
+                sx={{ minWidth: { xs: '48%', sm: 'auto' } }}
+              >
+                {t('textSplit.autoTasks', { defaultValue: '自动任务' })}
+              </Button>
+            </span>
+          </Tooltip>
 
           <Menu
             anchorEl={autoTasksMenuAnchorEl}
