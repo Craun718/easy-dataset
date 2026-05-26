@@ -1,11 +1,9 @@
 {
   "name": "easy-dataset",
-  "version": "1.7.3",
+  "version": "1.7.3-ntk-v4",
   "private": true,
   "author": {
-    "name": "ConardLi",
-    "email": "1009903985@qq.com",
-    "url": "https://github.com/ConardLi"
+    "name": "ConardLi & Ntk"
   },
   "homepage": "https://github.com/ConardLi/easy-dataset",
   "scripts": {

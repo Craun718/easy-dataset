@@ -12,9 +12,13 @@ function setupIpcHandlers(app, isDev) {
     event.returnValue = app.getPath('userData');
   });
 
-  // 检查更新
+  // 检查更新 - 已禁用
   ipcMain.handle('check-update', async () => {
-    return await checkUpdate(isDev);
+    return {
+      hasUpdate: false,
+      currentVersion: require('electron').app.getVersion(),
+      disabled: true
+    };
   });
 
   // 下载更新

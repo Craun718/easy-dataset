@@ -332,7 +332,7 @@ export default function ChunkCard({
             title={
               selectedModel?.id
                 ? t('textSplit.generateQuestions')
-                : t('textSplit.selectModelFirst', { defaultValue: '请先在右上角选择模型' })
+                : t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' })
             }
           >
             <span>
@@ -358,7 +358,7 @@ export default function ChunkCard({
             title={
               selectedModel?.id
                 ? t('textSplit.generateEvalQuestions', { defaultValue: '生成测试集' })
-                : t('textSplit.selectModelFirst', { defaultValue: '请先在右上角选择模型' })
+                : t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' })
             }
           >
             <span>
@@ -384,7 +384,7 @@ export default function ChunkCard({
             title={
               selectedModel?.id
                 ? t('textSplit.dataCleaning', { defaultValue: '数据清洗' })
-                : t('textSplit.selectModelFirst', { defaultValue: '请先在右上角选择模型' })
+                : t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' })
             }
           >
             <span>

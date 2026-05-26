@@ -406,6 +406,7 @@
     "deleteChunkFailed": "删除文本块失败",
     "deleteChunkError": "删除文本块出错",
     "selectModelFirst": "请先选择一个模型，可以在顶部导航栏选择",
+    "modelRequired": "请先选择模型以启用该功能",
     "modelNotAvailable": "选择的模型不可用，请重新选择",
     "generateQuestionsFailed": "为文本块 {{chunkId}} 生成问题失败",
     "questionsGenerated": "已生成 {{total}} 个问题",
