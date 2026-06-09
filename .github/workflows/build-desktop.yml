@@ -1,0 +1,78 @@
+name: Build Desktop Artifacts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            os: windows-latest
+            build_command: pnpm electron-build-win
+            artifact_name: easy-dataset-windows
+          - name: macOS
+            os: macos-latest
+            build_command: pnpm electron-build-mac
+            artifact_name: easy-dataset-macos
+          - name: Linux
+            os: ubuntu-latest
+            build_command: pnpm electron-build-linux
+            artifact_name: easy-dataset-linux
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libarchive-tools \
+            libasound2 \
+            libatk-bridge2.0-0 \
+            libdrm2 \
+            libgbm1 \
+            libgtk-3-0 \
+            libnotify4 \
+            libnss3 \
+            libsecret-1-0 \
+            libxkbcommon0 \
+            libxss1 \
+            rpm \
+            xdg-utils
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build desktop app
+        run: ${{ matrix.build_command }}
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}-${{ github.run_number }}
+          path: dist/
+          if-no-files-found: error
