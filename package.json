@@ -23,8 +23,11 @@
     "clean-dist": "rm -rf dist",
     "electron-build": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder -mwl",
     "electron-build-mac": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --mac",
+    "electron-build-mac-ci": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --mac --publish never",
     "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --win",
+    "electron-build-win-ci": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --win --publish never",
     "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --linux",
+    "electron-build-linux-ci": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --linux --publish never",
     "docker": "docker build -t easy-dataset .",
     "prettier": "npx prettier --write ."
   },

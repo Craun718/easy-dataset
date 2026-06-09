@@ -18,15 +18,15 @@ jobs:
         include:
           - name: Windows
             os: windows-latest
-            build_command: pnpm run electron-build-win -- --publish never
+            build_command: pnpm run electron-build-win-ci
             artifact_name: easy-dataset-windows
           - name: macOS
             os: macos-latest
-            build_command: pnpm run electron-build-mac -- --publish never
+            build_command: pnpm run electron-build-mac-ci
             artifact_name: easy-dataset-macos
           - name: Linux
             os: ubuntu-latest
-            build_command: pnpm run electron-build-linux -- --publish never
+            build_command: pnpm run electron-build-linux-ci
             artifact_name: easy-dataset-linux
 
     steps:
