@@ -20,14 +20,17 @@ jobs:
             os: windows-latest
             build_command: pnpm run electron-build-win-ci
             artifact_name: easy-dataset-windows
+            artifact_path: dist/*.exe
           - name: macOS
             os: macos-latest
             build_command: pnpm run electron-build-mac-ci
             artifact_name: easy-dataset-macos
+            artifact_path: dist/*.dmg
           - name: Linux
             os: ubuntu-latest
             build_command: pnpm run electron-build-linux-ci
             artifact_name: easy-dataset-linux
+            artifact_path: dist/*.AppImage
 
     steps:
       - name: Checkout
@@ -87,5 +90,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}
-          path: dist/
+          path: ${{ matrix.artifact_path }}
           if-no-files-found: error
