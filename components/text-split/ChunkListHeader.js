@@ -3,6 +3,7 @@
 import { Box, Typography, Checkbox, Button, Select, MenuItem, Tooltip, Menu, IconButton, Badge } from '@mui/material';
 import QuizIcon from '@mui/icons-material/Quiz';
 import DownloadIcon from '@mui/icons-material/Download';
+import UploadIcon from '@mui/icons-material/Upload';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import AssessmentIcon from '@mui/icons-material/Assessment';
@@ -30,7 +31,9 @@ export default function ChunkListHeader({
   chunks = [], // 添加chunks参数，用于导出文本块
   selectedModel = {},
   onFilterChange = null,
-  activeFilterCount = 0
+  activeFilterCount = 0,
+  onExportClick = null,  // 导出对话框触发回调
+  onImportClick = null   // 导入对话框触发回调
 }) {
   const { t, i18n } = useTranslation();
 
@@ -73,12 +76,6 @@ export default function ChunkListHeader({
   const handleBatchDelete = () => {
     handleMoreMenuClose();
     onBatchDeleteChunks();
-  };
-
-  // 处理导出文本块，关闭菜单并调用原有函数
-  const handleExport = () => {
-    handleMoreMenuClose();
-    handleExportChunks();
   };
 
   // 创建自动提取问题任务
@@ -168,11 +165,28 @@ export default function ChunkListHeader({
     }
   };
 
-  // 导出文本块为JSON文件的函数
-  const handleExportChunks = () => {
-    if (!chunks || chunks.length === 0) return;
+  // 处理导出文本块 - 触发外部导出对话框
+  const handleExport = () => {
+    handleMoreMenuClose();
+    if (onExportClick) {
+      onExportClick();
+    } else {
+      // 降级：原有客户端导出逻辑
+      handleExportChunksFallback();
+    }
+  };
 
-    // 创建要导出的数据对象
+  // 处理导入文本块 - 触发外部导入对话框
+  const handleImport = () => {
+    handleMoreMenuClose();
+    if (onImportClick) {
+      onImportClick();
+    }
+  };
+
+  // 原有客户端导出逻辑（降级用）
+  const handleExportChunksFallback = () => {
+    if (!chunks || chunks.length === 0) return;
     const exportData = chunks.map(chunk => ({
       name: chunk.name,
       projectId: chunk.projectId,
@@ -181,24 +195,14 @@ export default function ChunkListHeader({
       summary: chunk.summary,
       size: chunk.size
     }));
-
-    // 将数据转换为JSON字符串
     const jsonString = JSON.stringify(exportData, null, 2);
-
-    // 创建Blob对象
     const blob = new Blob([jsonString], { type: 'application/json' });
-
-    // 创建下载链接
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `text-chunks-export-${new Date().toISOString().split('T')[0]}.json`;
-
-    // 触发下载
     document.body.appendChild(a);
     a.click();
-
-    // 清理
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
@@ -400,6 +404,10 @@ export default function ChunkListHeader({
             <MenuItem onClick={handleExport} disabled={chunks.length === 0}>
               <DownloadIcon fontSize="small" sx={{ mr: 1 }} />
               {t('textSplit.exportChunks', { defaultValue: '导出文本块' })}
+            </MenuItem>
+            <MenuItem onClick={handleImport} disabled={!projectId}>
+              <UploadIcon fontSize="small" sx={{ mr: 1 }} />
+              {t('textSplit.importChunks', { defaultValue: '导入文本块' })}
             </MenuItem>
           </Menu>
         </Box>
