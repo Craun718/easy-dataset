@@ -8,6 +8,8 @@ import ChunkViewDialog from './ChunkViewDialog';
 import ChunkDeleteDialog from './ChunkDeleteDialog';
 import BatchEditChunksDialog from './BatchEditChunkDialog';
 import ChunkBatchDeleteDialog from './ChunkBatchDeleteDialog';
+import ChunkExportDialog from './ChunkExportDialog';
+import ChunkImportDialog from './ChunkImportDialog';
 import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 
@@ -49,6 +51,8 @@ export default function ChunkList({
   const [batchEditLoading, setBatchEditLoading] = useState(false);
   const [batchDeleteDialogOpen, setBatchDeleteDialogOpen] = useState(false);
   const [batchDeleteLoading, setBatchDeleteLoading] = useState(false);
+  const [exportDialogOpen, setExportDialogOpen] = useState(false);
+  const [importDialogOpen, setImportDialogOpen] = useState(false);
 
   // 娣诲姞楂樼骇绛涢€夌姸鎬?
   const [advancedFilters, setAdvancedFilters] = useState({
@@ -341,6 +345,8 @@ export default function ChunkList({
         selectedModel={selectedModel}
         onFilterChange={handleFilterChange}
         activeFilterCount={activeFilterCount}
+        onExportClick={() => setExportDialogOpen(true)}
+        onImportClick={() => setImportDialogOpen(true)}
       />
 
       <Grid container spacing={2}>
@@ -407,6 +413,27 @@ export default function ChunkList({
         onConfirm={handleConfirmBatchDelete}
         loading={batchDeleteLoading}
         count={selectedChunks.length}
+      />
+
+      {/* 导出文本块对话框 */}
+      <ChunkExportDialog
+        open={exportDialogOpen}
+        onClose={() => setExportDialogOpen(false)}
+        projectId={projectId}
+        chunks={chunks}
+        totalCount={chunks.length}
+      />
+
+      {/* 导入文本块对话框 */}
+      <ChunkImportDialog
+        open={importDialogOpen}
+        onClose={() => setImportDialogOpen(false)}
+        projectId={projectId}
+        onImportSuccess={() => {
+          if (onChunksUpdate) {
+            onChunksUpdate();
+          }
+        }}
       />
     </Box>
   );
