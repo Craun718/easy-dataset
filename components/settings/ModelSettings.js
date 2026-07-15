@@ -117,7 +117,7 @@ export default function ModelSettings({ projectId }) {
   useEffect(() => {
     getProvidersList();
     getModelConfigList();
-  }, []);
+  }, [getModelConfigList, getProvidersList]);
 
   // 获取提供商列表
   const getProvidersList = () => {

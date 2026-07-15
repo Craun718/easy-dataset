@@ -74,7 +74,7 @@ export default function ProjectLayout({ children, params }) {
     }
 
     fetchData();
-  }, [projectId, router]);
+  }, [fetchData, projectId, router]);
 
   if (loading) {
     return (

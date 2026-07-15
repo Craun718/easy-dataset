@@ -90,7 +90,7 @@ export default function QuestionTreeView({
     // 未分类问题也默认收起
     initialExpandedState['uncategorized'] = false;
     setExpandedTags(initialExpandedState);
-  }, [tags]);
+  }, [tags, expandedTags, fetchTagQuestions, projectId, searchTerm]);
 
   // 根据标签对问题进行分类
   useEffect(() => {
@@ -193,7 +193,7 @@ export default function QuestionTreeView({
         [tagLabel]: shouldExpand
       }));
     },
-    [expandedTags, loadedTags, projectId]
+    [expandedTags, loadedTags, projectId, fetchTagQuestions]
   );
 
   // 获取特定标签的问题数据
@@ -234,7 +234,7 @@ export default function QuestionTreeView({
         console.error(`获取标签 "${tagLabel}" 的问题失败:`, error);
       }
     },
-    [projectId, searchTerm, expandedTags]
+    [projectId, searchTerm]
   );
 
   // 检查问题是否被选中 - 使用 useCallback 优化
@@ -280,7 +280,15 @@ export default function QuestionTreeView({
         />
       );
     },
-    [isQuestionSelected, onSelectQuestion, onDeleteQuestion, handleGenerateDataset, processingQuestions, t]
+    [
+      isQuestionSelected,
+      onSelectQuestion,
+      onDeleteQuestion,
+      handleGenerateDataset,
+      processingQuestions,
+      t,
+      onEditQuestion
+    ]
   );
 
   // 计算标签及其子标签下的所有问题数量 - 使用 useMemo 缓存计算结果
@@ -512,6 +520,8 @@ const QuestionItem = memo(
   }
 );
 
+QuestionItem.displayName = 'QuestionItem';
+
 // 使用 memo 优化标签项渲染
 const TagItem = memo(({ tag, level, isExpanded, totalQuestions, onToggle, t }) => {
   return (
@@ -563,3 +573,5 @@ const TagItem = memo(({ tag, level, isExpanded, totalQuestions, onToggle, t }) =
     </ListItem>
   );
 });
+
+TagItem.displayName = 'TagItem';

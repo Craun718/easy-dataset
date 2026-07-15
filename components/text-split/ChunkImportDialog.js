@@ -73,46 +73,58 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
   };
 
   // 拖拽事件处理器
-  const handleDragEnter = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dragCounterRef.current += 1;
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      setIsDragging(true);
-    }
-  }, []);
+  const handleDragEnter = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      dragCounterRef.current += 1;
+      if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+        setIsDragging(true);
+      }
+    },
+    [processFile]
+  );
 
-  const handleDragLeave = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dragCounterRef.current -= 1;
-    if (dragCounterRef.current <= 0) {
-      dragCounterRef.current = 0;
+  const handleDragLeave = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      dragCounterRef.current -= 1;
+      if (dragCounterRef.current <= 0) {
+        dragCounterRef.current = 0;
+        setIsDragging(false);
+      }
+    },
+    [processFile]
+  );
+
+  const handleDragOver = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    [processFile]
+  );
+
+  const handleDrop = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
       setIsDragging(false);
-    }
-  }, []);
+      dragCounterRef.current = 0;
 
-  const handleDragOver = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  }, []);
-
-  const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-    dragCounterRef.current = 0;
-
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      processFile(files[0]);
-    }
-  }, []);
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        processFile(files[0]);
+      }
+    },
+    [processFile]
+  );
 
   /**
    * 处理文件（拖拽或点击选择共用）
    */
-  const processFile = async (file) => {
+  const processFile = async file => {
     setError('');
 
     try {
@@ -137,9 +149,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
         throw new Error(t('textSplit.emptyFile', 'File contains no data'));
       }
 
-      const invalidItems = data.filter(
-        item => !item.name || !item.fileName || !item.content
-      );
+      const invalidItems = data.filter(item => !item.name || !item.fileName || !item.content);
 
       setImportData({
         data,
@@ -158,7 +168,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
   /**
    * 点击选择文件
    */
-  const handleFileSelect = async (event) => {
+  const handleFileSelect = async event => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
     await processFile(files[0]);
@@ -302,9 +312,18 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
             </Alert>
 
             <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              <Chip icon={<InfoIcon />} label={t('import.total', { count: importData?.totalRecords || 0 })} variant="outlined" />
+              <Chip
+                icon={<InfoIcon />}
+                label={t('import.total', { count: importData?.totalRecords || 0 })}
+                variant="outlined"
+              />
               {importData?.invalidCount > 0 && (
-                <Chip icon={<ErrorIcon />} label={t('import.invalidCount', { count: importData.invalidCount })} color="warning" variant="outlined" />
+                <Chip
+                  icon={<ErrorIcon />}
+                  label={t('import.invalidCount', { count: importData.invalidCount })}
+                  color="warning"
+                  variant="outlined"
+                />
               )}
             </Box>
 
@@ -349,11 +368,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
             </Typography>
 
             <Paper sx={{ p: 3 }}>
-              <LinearProgress
-                variant="determinate"
-                value={progress}
-                sx={{ height: 8, borderRadius: 4, mb: 2 }}
-              />
+              <LinearProgress variant="determinate" value={progress} sx={{ height: 8, borderRadius: 4, mb: 2 }} />
               <Typography variant="body2" color="text.secondary">
                 {Math.round(progress)}% {t('import.complete', 'complete')}
               </Typography>
@@ -365,8 +380,18 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
               </Typography>
               <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                 <Chip icon={<InfoIcon />} label={t('import.total', { count: stats.total })} variant="outlined" />
-                <Chip icon={<CheckIcon />} label={t('import.success', { count: stats.success })} color="success" variant="outlined" />
-                <Chip icon={<ErrorIcon />} label={t('import.failed', { count: stats.failed })} color="error" variant="outlined" />
+                <Chip
+                  icon={<CheckIcon />}
+                  label={t('import.success', { count: stats.success })}
+                  color="success"
+                  variant="outlined"
+                />
+                <Chip
+                  icon={<ErrorIcon />}
+                  label={t('import.failed', { count: stats.failed })}
+                  color="error"
+                  variant="outlined"
+                />
               </Box>
             </Paper>
 
@@ -456,9 +481,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
         </Button>
         {currentStep === 1 && (
           <>
-            <Button onClick={() => setCurrentStep(0)}>
-              {t('common.back', 'Back')}
-            </Button>
+            <Button onClick={() => setCurrentStep(0)}>{t('common.back', 'Back')}</Button>
             <Button onClick={handleStartImport} variant="contained" color="primary">
               {t('textSplit.startImport', 'Start Import')}
             </Button>

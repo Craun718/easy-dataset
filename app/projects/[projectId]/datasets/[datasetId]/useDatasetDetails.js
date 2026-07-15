@@ -414,7 +414,7 @@ export default function useDatasetDetails(projectId, datasetId) {
   // 初始化和快捷键事件
   useEffect(() => {
     fetchDatasets();
-  }, [projectId, datasetId]);
+  }, [projectId, datasetId, fetchDatasets]);
 
   // 快捷键状态变化
   useEffect(() => {
@@ -471,7 +471,7 @@ export default function useDatasetDetails(projectId, datasetId) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [shortcutsEnabled, confirming, currentDataset]);
+  }, [shortcutsEnabled, confirming, currentDataset, handleConfirm, handleDelete, handleNavigate]);
 
   return {
     loading,

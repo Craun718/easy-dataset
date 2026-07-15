@@ -39,7 +39,7 @@ export default function ImportProgressStep({ projectId, rawData, fieldMapping, s
       startedRef.current = true;
       startImport();
     }
-  }, [rawData, fieldMapping, projectId]);
+  }, [rawData, fieldMapping, projectId, startImport]);
 
   const startImport = async () => {
     try {
@@ -220,11 +220,7 @@ export default function ImportProgressStep({ projectId, rawData, fieldMapping, s
         </Typography>
 
         <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
-          <Chip
-            icon={<InfoIcon />}
-            label={t('import.total', { count: importStats.total })}
-            variant="outlined"
-          />
+          <Chip icon={<InfoIcon />} label={t('import.total', { count: importStats.total })} variant="outlined" />
           <Chip
             icon={<CheckIcon />}
             label={t('import.success', { count: importStats.success })}

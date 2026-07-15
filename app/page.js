@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { Container, Box, Typography, CircularProgress, Stack, useTheme } from '@mui/material';
@@ -66,7 +66,7 @@ export default function Home() {
     }
 
     fetchProjects();
-  }, []);
+  }, [t]);
 
   const theme = useTheme();
 

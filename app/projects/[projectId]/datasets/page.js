@@ -192,7 +192,7 @@ export default function DatasetsPage({ params }) {
       }
     };
     fetchAvailableTags();
-  }, [projectId, page, rowsPerPage, debouncedSearchQuery, searchField, isInitialized]);
+  }, [projectId, page, rowsPerPage, debouncedSearchQuery, searchField, isInitialized, getDatasetsList]);
 
   // 处理页码变化
   const handlePageChange = (_event, newPage) => {

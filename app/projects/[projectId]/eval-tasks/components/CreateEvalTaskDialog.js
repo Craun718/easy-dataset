@@ -69,7 +69,7 @@ export default function CreateEvalTaskDialog({ open, onClose, projectId, onSucce
     if (hasSubjectiveQuestions && open) {
       initScoreAnchors(i18n.language);
     }
-  }, [hasSubjectiveQuestions, open, i18n.language]);
+  }, [hasSubjectiveQuestions, open, i18n.language, initScoreAnchors]);
 
   // 统计各题型数量
   const typeStats = {};

@@ -26,7 +26,7 @@ const ChatArea = ({ selectedModels, conversations, loading, getModelName }) => {
         ref.current.scrollTop = ref.current.scrollHeight;
       }
     });
-  }, [conversations]);
+  }, [conversations, chatContainerRefs]);
 
   if (selectedModels.length === 0) {
     return (

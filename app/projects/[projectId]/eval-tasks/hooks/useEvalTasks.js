@@ -76,7 +76,7 @@ export default function useEvalTasks(projectId) {
         return false;
       }
     },
-    [projectId]
+    [projectId, loadTasks]
   );
 
   // 中断任务

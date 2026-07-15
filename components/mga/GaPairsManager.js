@@ -57,7 +57,7 @@ export default function GaPairsManager({ projectId, fileId, onGaPairsChange }) {
 
   useEffect(() => {
     loadGaPairs();
-  }, [projectId, fileId]);
+  }, [projectId, fileId, loadGaPairs]);
 
   const loadGaPairs = async () => {
     try {

@@ -93,7 +93,7 @@ export default function QuestionEditDialog({
         label: ''
       });
     }
-  }, [initialData]);
+  }, [initialData, getChunks, projectId]);
 
   const handleSubmit = () => {
     onSubmit(formData);
@@ -121,7 +121,7 @@ export default function QuestionEditDialog({
     return flatTags;
   };
 
-  const flattenedTags = useMemo(() => flattenTags(tags), [tags, t]);
+  const flattenedTags = useMemo(() => flattenTags(tags), [tags, t, flattenTags]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>

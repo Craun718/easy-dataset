@@ -73,7 +73,7 @@ export default function TasksPage({ params }) {
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [projectId, statusFilter, typeFilter, page, rowsPerPage]);
+  }, [projectId, statusFilter, typeFilter, page, rowsPerPage, fetchTasks]);
 
   const handleDeleteTask = async taskId => {
     if (!confirm(t('tasks.confirmDelete'))) return;

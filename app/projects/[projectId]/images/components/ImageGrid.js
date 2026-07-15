@@ -23,6 +23,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 import { imageStyles } from '../styles/imageStyles';
 
 export default function ImageGrid({
@@ -86,7 +87,7 @@ export default function ImageGrid({
                     label={`${image.datasetCount || 0} ${t('images.datasets', { defaultValue: '数据集' })}`}
                     size="small"
                     color={image.datasetCount > 0 ? 'success' : 'default'}
-                    sx={imageStyles.statusChip}
+                    sx={imageStyles.imageNameChip}
                   />
                 </Box>
 
@@ -169,14 +170,12 @@ export default function ImageGrid({
         >
           {previewImage && (
             <Box sx={{ width: '100%', textAlign: 'center' }}>
-              <img
+              <Image
                 src={previewImage.base64 || previewImage.path}
                 alt={previewImage.imageName}
-                style={{
-                  maxWidth: '100%',
-                  maxHeight: '90vh',
-                  objectFit: 'contain'
-                }}
+                fill
+                style={{ objectFit: 'contain' }}
+                unoptimized
               />
               <Typography
                 variant="caption"

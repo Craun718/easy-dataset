@@ -93,7 +93,7 @@ export default function MarkdownViewDialog({ open, text, onClose, projectId, onS
     } else {
       setChunksPreview([]);
     }
-  }, [splitPoints, text?.content]);
+  }, [splitPoints, text?.content, calculateChunksPreview]);
 
   // 处理用户选择文本事件
   const handleTextSelection = () => {

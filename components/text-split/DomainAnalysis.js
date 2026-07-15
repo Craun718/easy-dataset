@@ -205,7 +205,7 @@ export default function DomainAnalysis({ projectId, toc = '', loading = false })
 
   useEffect(() => {
     getTags();
-  }, []);
+  }, [getTags]);
   const getTags = async () => {
     const response = await axios.get(`/api/projects/${projectId}/tags`);
     setTags(response.data.tags);

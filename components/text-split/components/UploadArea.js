@@ -180,13 +180,7 @@ export default function UploadArea({
           </List>
 
           <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onUpload}
-              disabled={uploading}
-              sx={{ minWidth: 120 }}
-            >
+            <Button variant="contained" color="primary" onClick={onUpload} disabled={uploading} sx={{ minWidth: 120 }}>
               {uploading ? <CircularProgress size={24} /> : t('textSplit.uploadAndProcess')}
             </Button>
           </Box>

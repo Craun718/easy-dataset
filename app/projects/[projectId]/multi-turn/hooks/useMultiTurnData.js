@@ -300,7 +300,7 @@ export const useMultiTurnData = projectId => {
 
   useEffect(() => {
     fetchConversations(page, { showLoading: true });
-  }, [projectId, page, rowsPerPage]);
+  }, [fetchConversations, projectId, page, rowsPerPage]);
 
   useEffect(() => {
     return () => {

@@ -25,11 +25,7 @@ export async function POST(request, { params }) {
     const { projectId } = params;
     const body = await request.json();
 
-    const {
-      format = 'json',
-      fileIds = [],
-      keyword = ''
-    } = body;
+    const { format = 'json', fileIds = [], keyword = '' } = body;
 
     if (!['json', 'jsonl'].includes(format)) {
       return NextResponse.json({ code: 400, error: 'Unsupported export format' }, { status: 400 });

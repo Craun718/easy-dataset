@@ -38,7 +38,7 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
 
   const needServerExport = chunks.length > 500 || totalCount > 500;
 
-  const handleFormatChange = (event) => {
+  const handleFormatChange = event => {
     setFormat(event.target.value);
   };
 
@@ -177,7 +177,11 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
             <>
               <FormControl fullWidth>
                 <InputLabel>{t('textSplit.selectExportFormat', 'Export Format')}</InputLabel>
-                <Select value={format} onChange={handleFormatChange} label={t('textSplit.selectExportFormat', 'Export Format')}>
+                <Select
+                  value={format}
+                  onChange={handleFormatChange}
+                  label={t('textSplit.selectExportFormat', 'Export Format')}
+                >
                   <MenuItem value="json">JSON</MenuItem>
                   <MenuItem value="jsonl">JSONL</MenuItem>
                 </Select>
@@ -186,16 +190,17 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
               <Typography variant="body2" color="text.secondary">
                 {needServerExport
                   ? t('textSplit.exportLargeHint', 'Large dataset detected, server-side streaming export will be used')
-                  : t('textSplit.exportSmallHint', '{{count}} chunks will be exported', { count: chunks.length })
-                }
+                  : t('textSplit.exportSmallHint', '{{count}} chunks will be exported', { count: chunks.length })}
               </Typography>
             </>
           ) : (
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, py: 2 }}>
-              <Typography variant="body1">
-                {t('textSplit.exportingData', 'Exporting data...')}
-              </Typography>
-              <LinearProgress variant="determinate" value={progress} sx={{ width: '100%', height: 8, borderRadius: 4 }} />
+              <Typography variant="body1">{t('textSplit.exportingData', 'Exporting data...')}</Typography>
+              <LinearProgress
+                variant="determinate"
+                value={progress}
+                sx={{ width: '100%', height: 8, borderRadius: 4 }}
+              />
               <Typography variant="body2" color="text.secondary">
                 {progress}%
               </Typography>

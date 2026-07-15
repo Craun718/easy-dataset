@@ -47,7 +47,7 @@ export default function PromptSettings() {
   // 加载提示词数据
   useEffect(() => {
     loadPromptData();
-  }, [projectId, currentLanguage]);
+  }, [projectId, currentLanguage, loadPromptData]);
 
   // 监听语言变化
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function PromptSettings() {
     if (selectedPrompt) {
       loadPromptContent();
     }
-  }, [selectedPrompt]);
+  }, [selectedPrompt, loadPromptContent]);
 
   // 初始化选择第一个分类和提示词
   useEffect(() => {

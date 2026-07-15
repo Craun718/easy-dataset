@@ -52,7 +52,7 @@ export default function FileUploader({
 
   useEffect(() => {
     fetchUploadedFiles();
-  }, [currentPage, searchFileName]);
+  }, [currentPage, searchFileName, fetchUploadedFiles]);
 
   /**
    * 处理 PDF 处理方式选择

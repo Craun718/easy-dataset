@@ -8,6 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { useTheme } from '@mui/material/styles';
 import { playgroundStyles } from '@/styles/playground';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const MessageInput = ({
   userInput,
@@ -51,10 +52,11 @@ const MessageInput = ({
             overlap="rectangular"
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
-            <img
+            <Image
               src={uploadedImage}
               alt="上传图片"
-              style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '4px' }}
+              fill
+              style={{ objectFit: 'contain', borderRadius: '4px', maxHeight: '200px' }}
             />
           </Badge>
         </Box>

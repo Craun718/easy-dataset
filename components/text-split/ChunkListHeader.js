@@ -32,8 +32,8 @@ export default function ChunkListHeader({
   selectedModel = {},
   onFilterChange = null,
   activeFilterCount = 0,
-  onExportClick = null,  // 导出对话框触发回调
-  onImportClick = null   // 导入对话框触发回调
+  onExportClick = null, // 导出对话框触发回调
+  onImportClick = null // 导入对话框触发回调
 }) {
   const { t, i18n } = useTranslation();
 
@@ -262,22 +262,22 @@ export default function ChunkListHeader({
           }}
         >
           <Tooltip
-              title={!selectedModel?.id ? t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' }) : ''}
-            >
-              <span>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  startIcon={<QuizIcon />}
-                  disabled={selectedChunks.length === 0 || !selectedModel?.id}
-                  onClick={onBatchGenerateQuestions}
-                  size="medium"
-                  sx={{ minWidth: { xs: '48%', sm: 'auto' } }}
-                >
-                  {t('textSplit.batchGenerateQuestions')}
-                </Button>
-              </span>
-            </Tooltip>
+            title={!selectedModel?.id ? t('textSplit.modelRequired', { defaultValue: '请先选择模型以启用该功能' }) : ''}
+          >
+            <span>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<QuizIcon />}
+                disabled={selectedChunks.length === 0 || !selectedModel?.id}
+                onClick={onBatchGenerateQuestions}
+                size="medium"
+                sx={{ minWidth: { xs: '48%', sm: 'auto' } }}
+              >
+                {t('textSplit.batchGenerateQuestions')}
+              </Button>
+            </span>
+          </Tooltip>
 
           {/* 自动任务下拉菜单 */}
           <Tooltip

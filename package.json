@@ -24,7 +24,7 @@
     "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --win",
     "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --linux",
     "docker": "docker build -t easy-dataset .",
-    "prettier": "npx prettier --write ."
+    "prettier": "prettier --write ."
   },
   "bin": "desktop/server.js",
   "pkg": {
@@ -101,13 +101,14 @@
     "concurrently": "^8.2.2",
     "electron": "^35.0.0",
     "electron-builder": "^24.13.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.29",
     "husky": "^9.1.7",
     "lint-staged": "15.5.2",
     "pkg": "^5.8.1",
+    "prettier": "^3.9.5",
     "prisma": "^6.6.0",
-    "wait-on": "^7.2.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.29"
+    "wait-on": "^7.2.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md}": "npm run prettier"

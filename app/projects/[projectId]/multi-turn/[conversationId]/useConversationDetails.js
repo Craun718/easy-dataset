@@ -181,7 +181,7 @@ export default function useConversationDetails(projectId, conversationId) {
   // 初始化
   useEffect(() => {
     fetchConversation();
-  }, [projectId, conversationId]);
+  }, [fetchConversation, projectId, conversationId]);
 
   return {
     // 数据状态

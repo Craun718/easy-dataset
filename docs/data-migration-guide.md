@@ -19,19 +19,19 @@ Easy Dataset 的数据存储在**两个位置**：
 
 ### SQLite 数据库
 
-| 项目 | 说明 |
-|------|------|
-| 路径 | `<项目根目录>/prisma/db.sqlite` |
-| 配置来源 | `.env` 中的 `DATABASE_URL="file:./db.sqlite"` |
+| 项目     | 说明                                                                                                |
+| -------- | --------------------------------------------------------------------------------------------------- |
+| 路径     | `<项目根目录>/prisma/db.sqlite`                                                                     |
+| 配置来源 | `.env` 中的 `DATABASE_URL="file:./db.sqlite"`                                                       |
 | 包含内容 | 所有项目的元数据和内容：Projects、Chunks、Questions、Datasets、ImageDatasets、EvalDatasets 等全部表 |
 
 ### 文件系统（项目文件目录）
 
-| 项目 | 说明 |
-|------|------|
-| 路径 | `<项目根目录>/local-db/<projectId>/` |
+| 项目     | 说明                                     |
+| -------- | ---------------------------------------- |
+| 路径     | `<项目根目录>/local-db/<projectId>/`     |
 | 配置来源 | `lib/db/base.js` 中的 `getDbDirectory()` |
-| 目录结构 | 见下表 |
+| 目录结构 | 见下表                                   |
 
 ```
 local-db/
@@ -52,18 +52,18 @@ local-db/
 
 > **注意**：`local-db` 目录在不同环境下的位置有所不同：
 >
-> | 环境 | 路径 |
-> |------|------|
-> | 开发模式 (`npm run dev`) | `<项目根目录>/local-db/` |
-> | Electron 打包后 | `<用户数据目录>/local-db/` (如 `C:\Users\<用户名>\AppData\Roaming\Easy Dataset\local-db\`) |
-> | 自定义 | 可通过 `.env` 中 `LOCAL_DB_PATH` 指定 |
+> | 环境                     | 路径                                                                                       |
+> | ------------------------ | ------------------------------------------------------------------------------------------ |
+> | 开发模式 (`npm run dev`) | `<项目根目录>/local-db/`                                                                   |
+> | Electron 打包后          | `<用户数据目录>/local-db/` (如 `C:\Users\<用户名>\AppData\Roaming\Easy Dataset\local-db\`) |
+> | 自定义                   | 可通过 `.env` 中 `LOCAL_DB_PATH` 指定                                                      |
 
 ### Chunks 的双重存储
 
-| 存储位置 | 内容 | 说明 |
-|----------|------|------|
-| `Chunks` 表 (SQLite) | 元数据 + **完整文本内容** (`content` 字段) | **权威数据源**，运行时读取 chunks 内容从这里取 |
-| `files/*.md` (文件系统) | 切分前的完整 Markdown 源文件 | 可在新项目重新上传以重建 chunks |
+| 存储位置                | 内容                                       | 说明                                           |
+| ----------------------- | ------------------------------------------ | ---------------------------------------------- |
+| `Chunks` 表 (SQLite)    | 元数据 + **完整文本内容** (`content` 字段) | **权威数据源**，运行时读取 chunks 内容从这里取 |
+| `files/*.md` (文件系统) | 切分前的完整 Markdown 源文件               | 可在新项目重新上传以重建 chunks                |
 
 ---
 
@@ -241,11 +241,11 @@ curl "http://localhost:3000/api/projects/migrate?taskId=1719000000000"
 
 状态说明：
 
-| status | 说明 |
-|--------|------|
-| `running` | 迁移进行中 |
+| status      | 说明                                     |
+| ----------- | ---------------------------------------- |
+| `running`   | 迁移进行中                               |
 | `completed` | 迁移完成，`completed` 为成功迁移的项目数 |
-| `failed` | 迁移失败，查看 `error` 字段获取错误信息 |
+| `failed`    | 迁移失败，查看 `error` 字段获取错误信息  |
 
 #### 步骤 4：验证结果
 
@@ -275,11 +275,11 @@ curl "http://localhost:3000/api/projects/migrate?taskId=xxx"
 
 常见失败原因：
 
-| 错误 | 可能原因 | 解决方法 |
-|------|----------|----------|
-| `config.json` 不存在 | 项目目录不完整 | 检查 `local-db/<projectId>/config.json` 是否存在 |
-| Chunk 写入失败 | `chunks/` 目录为空或格式不对 | 确认 chunk 文件名格式为 `<baseName>-part-N` |
-| Question 关联失败 | chunk name 不匹配 | 确保 `questions.json` 中的 `chunkId` 与 chunk 文件名一致 |
+| 错误                 | 可能原因                     | 解决方法                                                 |
+| -------------------- | ---------------------------- | -------------------------------------------------------- |
+| `config.json` 不存在 | 项目目录不完整               | 检查 `local-db/<projectId>/config.json` 是否存在         |
+| Chunk 写入失败       | `chunks/` 目录为空或格式不对 | 确认 chunk 文件名格式为 `<baseName>-part-N`              |
+| Question 关联失败    | chunk name 不匹配            | 确保 `questions.json` 中的 `chunkId` 与 chunk 文件名一致 |
 
 ---
 

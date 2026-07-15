@@ -98,7 +98,7 @@ export default function QuestionsPage({ params }) {
   // 当筛选条件改变时，重置页码到第1页
   useEffect(() => {
     setCurrentPage(1);
-  }, [answerFilter, debouncedSearchTerm, debouncedChunkNameFilter, sourceTypeFilter, searchMatchMode]);
+  }, [answerFilter, debouncedSearchTerm, debouncedChunkNameFilter, sourceTypeFilter, searchMatchMode, getQuestionList]);
 
   useEffect(() => {
     getQuestionList();
@@ -139,7 +139,7 @@ export default function QuestionsPage({ params }) {
   // 获取所有数据
   useEffect(() => {
     getQuestionList();
-  }, [projectId]);
+  }, [projectId, getQuestionList]);
 
   // 处理标签页切换
   const handleTabChange = (event, newValue) => {

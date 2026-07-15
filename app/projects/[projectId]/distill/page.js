@@ -205,7 +205,7 @@ export default function DistillPage() {
       fetchTags();
       fetchDistillStats();
     }
-  }, [projectId]);
+  }, [projectId, fetchDistillStats, fetchProject, fetchTags]);
 
   // 监听多轮对话数据集刷新事件
   useEffect(() => {
@@ -220,7 +220,7 @@ export default function DistillPage() {
         window.removeEventListener('refreshDistillStats', handleRefreshStats);
       };
     }
-  }, [projectId]);
+  }, [projectId, fetchDistillStats]);
 
   // 获取项目信息
   const fetchProject = async () => {

@@ -245,7 +245,7 @@ export function DatasetSearchBar() {
                               </Box>
                               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography variant="body2" color="text.secondary" sx={{ mr: 1 }}>
-                                  "{searchQuery}"
+                                  &quot;{searchQuery}&quot;
                                 </Typography>
                                 <LaunchIcon fontSize="small" color="action" />
                               </Box>

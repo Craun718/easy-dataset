@@ -43,9 +43,9 @@ app.whenReady().then(async () => {
     }
 
     // 设置自动更新
-// setupAutoUpdater(mainWindow); // Removed electron-updater
+    // setupAutoUpdater(mainWindow); // Removed electron-updater
 
-// 自动更新功能已移除
+    // 自动更新功能已移除
   } catch (error) {
     console.error('An error occurred during application initialization:', error);
     dialog.showErrorBox(
