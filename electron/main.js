@@ -3,7 +3,7 @@ const { setupLogging, setupIpcLogging } = require('./modules/logger');
 const { createWindow, loadAppUrl, openDevTools, getMainWindow } = require('./modules/window-manager');
 const { createMenu } = require('./modules/menu');
 const { startNextServer } = require('./modules/server');
-const { setupAutoUpdater } = require('./modules/updater');
+// const { setupAutoUpdater } = require('./modules/updater'); // Removed electron-updater
 const { initializeDatabase } = require('./modules/database');
 const { clearCache } = require('./modules/cache');
 const { setupIpcHandlers } = require('./modules/ipc-handlers');
@@ -43,17 +43,9 @@ app.whenReady().then(async () => {
     }
 
     // 设置自动更新
-    setupAutoUpdater(mainWindow);
+// setupAutoUpdater(mainWindow); // Removed electron-updater
 
-    // 应用启动完成后的一段时间后自动检查更新
-    setTimeout(() => {
-      if (!isDev) {
-        const { autoUpdater } = require('electron-updater');
-        autoUpdater.checkForUpdates().catch(err => {
-          console.error('Automatic update check failed:', err);
-        });
-      }
-    }, 10000); // Check for updates after 10 seconds
+// 自动更新功能已移除
   } catch (error) {
     console.error('An error occurred during application initialization:', error);
     dialog.showErrorBox(
