@@ -9,7 +9,8 @@ function setupIpcHandlers(app, isDev) {
     return {
       hasUpdate: false,
       currentVersion: require('electron').app.getVersion(),
-      disabled: true
+      disabled: true,
+      message: '魔改版应用不支持自动更新，请向发行方索要最新安装包'
     };
   });
 

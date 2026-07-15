@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Box, Button, Snackbar, Alert, Typography, Link, CircularProgress, LinearProgress } from '@mui/material';
 import UpdateIcon from '@mui/icons-material/Update';
+import WarningIcon from '@mui/icons-material/Warning';
 import { useTranslation } from 'react-i18next';
 
 const UpdateChecker = () => {
@@ -13,6 +14,8 @@ const UpdateChecker = () => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [updateDownloaded, setUpdateDownloaded] = useState(false);
   const [updateError, setUpdateError] = useState(null);
+  const [disabledMessage, setDisabledMessage] = useState('');
+  const hasShownDisabledRef = useRef(false);
 
   // 检查更新
   const checkForUpdates = async () => {
@@ -34,6 +37,12 @@ const UpdateChecker = () => {
           ...prev,
           currentVersion: result.currentVersion
         }));
+      }
+
+      if (result?.disabled && result?.message && !hasShownDisabledRef.current) {
+        setDisabledMessage(result.message);
+        setOpen(true);
+        hasShownDisabledRef.current = true;
       }
     } catch (error) {
       console.error('Failed to check for updates:', error);
@@ -145,7 +154,6 @@ const UpdateChecker = () => {
     setOpen(false);
   };
 
-  // 如果没有更新或者不在 Electron 环境中，不显示任何内容
   if (!updateAvailable && !open) return null;
 
   return (
@@ -158,75 +166,69 @@ const UpdateChecker = () => {
 
       <Snackbar
         open={open}
-        autoHideDuration={null}
+        autoHideDuration={disabledMessage ? 10000 : null}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
-        <Alert onClose={handleClose} severity="info" sx={{ width: '100%', maxWidth: 400 }}>
-          <Box sx={{ p: 1 }}>
-            <Typography variant="h6">{t('update.newVersionAvailable')}</Typography>
-
-            {updateInfo && (
-              <>
-                <Typography variant="body2" sx={{ mt: 1 }}>
-                  {t('update.currentVersion')}: {updateInfo.currentVersion}
-                </Typography>
-                <Typography variant="body2">
-                  {t('update.latestVersion')}: {updateInfo.version}
-                </Typography>
-              </>
-            )}
-
-            {checking && (
-              <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-                <CircularProgress size={16} sx={{ mr: 1 }} />
-                <Typography variant="body2">{t('update.checking')}</Typography>
-              </Box>
-            )}
-
-            {updateError && (
-              <Typography variant="body2" color="error.main" sx={{ mt: 1 }}>
-                {updateError}
+        {disabledMessage ? (
+          <Alert onClose={handleClose} severity="warning" icon={<WarningIcon />} sx={{ width: '100%', maxWidth: 420 }}>
+            <Box sx={{ p: 1 }}>
+              <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <WarningIcon color="warning" /> 更新不可用
               </Typography>
-            )}
-
-            {downloading && (
-              <Box sx={{ mt: 2, width: '100%' }}>
-                <Typography variant="body2" sx={{ mb: 0.5 }}>
-                  {t('update.downloading')}: {Math.round(downloadProgress)}%
-                </Typography>
-                <LinearProgress variant="determinate" value={downloadProgress} />
-              </Box>
-            )}
-
-            <Box sx={{ mt: 2, display: 'flex', gap: 2 }}>
-              {/* {!downloading && !updateDownloaded ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disabled={checking || downloading}
-                  onClick={downloadUpdate}
-                >
-                  {t('update.downloadNow')}
-                </Button>
-              ) : updateDownloaded ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={installUpdate}
-                >
-                  {t('update.installNow')}
-                </Button>
-              ) : null} */}
-
-              {updateInfo?.releaseUrl && (
-                <Link href={updateInfo.releaseUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outlined">{t('update.viewRelease')}</Button>
-                </Link>
-              )}
+              <Typography variant="body2" sx={{ mt: 1 }}>
+                {disabledMessage}
+              </Typography>
             </Box>
-          </Box>
-        </Alert>
+          </Alert>
+        ) : (
+          <Alert onClose={handleClose} severity="info" sx={{ width: '100%', maxWidth: 400 }}>
+            <Box sx={{ p: 1 }}>
+              <Typography variant="h6">{t('update.newVersionAvailable')}</Typography>
+
+              {updateInfo && (
+                <>
+                  <Typography variant="body2" sx={{ mt: 1 }}>
+                    {t('update.currentVersion')}: {updateInfo.currentVersion}
+                  </Typography>
+                  <Typography variant="body2">
+                    {t('update.latestVersion')}: {updateInfo.version}
+                  </Typography>
+                </>
+              )}
+
+              {checking && (
+                <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                  <CircularProgress size={16} sx={{ mr: 1 }} />
+                  <Typography variant="body2">{t('update.checking')}</Typography>
+                </Box>
+              )}
+
+              {updateError && (
+                <Typography variant="body2" color="error.main" sx={{ mt: 1 }}>
+                  {updateError}
+                </Typography>
+              )}
+
+              {downloading && (
+                <Box sx={{ mt: 2, width: '100%' }}>
+                  <Typography variant="body2" sx={{ mb: 0.5 }}>
+                    {t('update.downloading')}: {Math.round(downloadProgress)}%
+                  </Typography>
+                  <LinearProgress variant="determinate" value={downloadProgress} />
+                </Box>
+              )}
+
+              <Box sx={{ mt: 2, display: 'flex', gap: 2 }}>
+                {updateInfo?.releaseUrl && (
+                  <Link href={updateInfo.releaseUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outlined">{t('update.viewRelease')}</Button>
+                  </Link>
+                )}
+              </Box>
+            </Box>
+          </Alert>
+        )}
       </Snackbar>
     </>
   );
