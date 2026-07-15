@@ -269,7 +269,7 @@
     "save": "保存",
     "cancel": "取消",
     "done": "完成",
-    "back": "上一步",
+    "back": "返回",
     "complete": "完成",
     "close": "关闭",
     "add": "添加",
@@ -314,7 +314,6 @@
     "closeMenu": "关闭菜单",
     "documentation": "文档",
     "viewOnGitHub": "在 GitHub 上查看",
-    "back": "返回",
     "refresh": "刷新",
     "expand": "展开全部",
     "collapse": "收起内容",
@@ -393,7 +392,7 @@
     "importCompleted": "导入完成！",
     "importingData": "正在导入数据...",
     "startImport": "开始导入",
-    "unsupportedFormat": "不支持的文件格式",
+    "unsupportedFormat": "不支持的文件格式: {{files}}",
     "emptyFile": "文件中没有有效数据",
     "parseFileFailed": "解析文件失败",
     "allChunks": "全部文本块",
@@ -469,7 +468,6 @@
     "progressStatus": "已选择 {{total}} 个文本块，已处理完成 {{completed}} 个",
     "processingPleaseWait": "正在努力处理中，请稍候！",
     "oneFileLimit": "已有上传文件，不允许选择新文件",
-    "unsupportedFormat": "不支持的文件格式: {{files}}",
     "modelInfoParseError": "解析模型信息失败",
     "uploadFailed": "上传失败，请刷新页面后重试！",
     "uploadSuccess": "成功上传 {{count}} 个文件",
@@ -935,7 +933,8 @@
     "answerArrayHint": "多选题答案请输入数组，如 [\"A\", \"C\"]",
     "answerBoolHint": "判断题答案请输入 ✅ 或 ❌",
     "evalVariantPreviewTitle": "确认生成的题目",
-    "generate": "生成"
+    "generate": "生成",
+    "skipped": "跳过: {{count}}"
   },
   "update": {
     "newVersion": "新版本",

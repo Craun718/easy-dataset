@@ -898,7 +898,8 @@
     "answerArrayHint": "Para respostas de múltipla escolha, insira um array, como [\"A\", \"C\"]",
     "answerBoolHint": "Para questões de verdadeiro/falso, insira ✅ ou ❌",
     "evalVariantPreviewTitle": "Confirmar Questões Geradas",
-    "generate": "Gerar"
+    "generate": "Gerar",
+    "skipped": "Ignorado: {{count}}"
   },
   "update": {
     "newVersion": "Nova Versão",

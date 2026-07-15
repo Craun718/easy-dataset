@@ -381,9 +381,9 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
                 {t('import.importStats', 'Import Statistics')}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                <Chip icon={<InfoIcon />} label={`${t('import.total', 'Total')}: ${stats.total}`} variant="outlined" />
-                <Chip icon={<CheckIcon />} label={`${t('import.success', 'Success')}: ${stats.success}`} color="success" variant="outlined" />
-                <Chip icon={<ErrorIcon />} label={`${t('import.failed', 'Failed')}: ${stats.failed}`} color="error" variant="outlined" />
+                <Chip icon={<InfoIcon />} label={t('import.total', { count: stats.total })} variant="outlined" />
+                <Chip icon={<CheckIcon />} label={t('import.success', { count: stats.success })} color="success" variant="outlined" />
+                <Chip icon={<ErrorIcon />} label={t('import.failed', { count: stats.failed })} color="error" variant="outlined" />
               </Box>
             </Paper>
 

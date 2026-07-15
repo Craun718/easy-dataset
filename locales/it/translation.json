@@ -655,9 +655,9 @@
     "processing": "Elaborazione in corso... Placeholder0}/Placeholder1}",
     "completed": "Importazione completata",
     "importStats": "Importa statistiche",
-    "total": "Totale: SEGNAPOSTO0}",
-    "success": "Operazione riuscita: PLACEholder0}",
-    "failed": "Non riuscito: PLACEholder0}",
+    "total": "Totale: {{count}}",
+    "success": "Operazione riuscita: {{count}}",
+    "failed": "Non riuscito: {{count}}",
     "source": "Origine dati",
     "description": "Spiegazione",
     "errors": "Messaggi di errore",
@@ -665,7 +665,8 @@
     "importSuccess": "Importazione del Dataset completata!",
     "enterDatasetName": "Inserisci il nome del Dataset",
     "noDatasetFound": "Nessun Dataset corrispondente trovato",
-    "complete": "completare"
+    "complete": "completare",
+    "skipped": "Saltato: {{count}}"
   },
   "export_extended": {
     "answerFieldName": "Nome del campo di risposta",

@@ -317,7 +317,6 @@
     "closeMenu": "Close Menu",
     "documentation": "Documentation",
     "viewOnGitHub": "View on GitHub",
-    "back": "Back",
     "refresh": "Refresh",
     "expand": "Expand All",
     "collapse": "Collapse",
@@ -396,7 +395,7 @@
     "importCompleted": "Import completed!",
     "importingData": "Importing data...",
     "startImport": "Start Import",
-    "unsupportedFormat": "Unsupported file format",
+    "unsupportedFormat": "Unsupported file format: {{files}}",
     "emptyFile": "File contains no data",
     "parseFileFailed": "Failed to parse file",
     "allChunks": "All Text Chunks",
@@ -471,7 +470,6 @@
     "progressStatus": "Selected {{total}} text chunks, {{completed}} completed",
     "processingPleaseWait": "Processing, please wait!",
     "oneFileLimit": "File upload not allowed, there is already an uploaded file",
-    "unsupportedFormat": "Unsupported file format: {{files}}",
     "modelInfoParseError": "Failed to parse model information",
     "uploadFailed": "Upload failed",
     "uploadSuccess": "Successfully uploaded {{count}} files",
@@ -752,7 +750,8 @@
     "answerArrayHint": "For multiple choice, please enter an array, e.g. [\"A\", \"C\"]",
     "answerBoolHint": "For True/False, please enter ✅ or ❌",
     "evalVariantPreviewTitle": "Confirm Generated Questions",
-    "generate": "Generate"
+    "generate": "Generate",
+    "skipped": "Skipped: {{count}}"
   },
   "export_extended": {
     "answerFieldName": "Answer Field Name",

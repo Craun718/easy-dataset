@@ -729,7 +729,8 @@
     "answerArrayHint": "Çok seçimli için lütfen bir dizi girin, örn. [\"A\", \"C\"]",
     "answerBoolHint": "Doğru/Yanlış için lütfen ✅ veya ❌ girin",
     "evalVariantPreviewTitle": "Oluşturulan Soruları Onayla",
-    "generate": "Oluştur"
+    "generate": "Oluştur",
+    "skipped": "Atlandı: {{count}}"
   },
   "export_extended": {
     "answerFieldName": "Cevap Alanı Adı",

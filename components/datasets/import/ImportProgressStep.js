@@ -222,19 +222,19 @@ export default function ImportProgressStep({ projectId, rawData, fieldMapping, s
         <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
           <Chip
             icon={<InfoIcon />}
-            label={t('import.total', '总计: {{count}}', { count: importStats.total })}
+            label={t('import.total', { count: importStats.total })}
             variant="outlined"
           />
           <Chip
             icon={<CheckIcon />}
-            label={t('import.success', '成功: {{count}}', { count: importStats.success })}
+            label={t('import.success', { count: importStats.success })}
             color="success"
             variant="outlined"
           />
           {importStats.skipped > 0 && (
             <Chip
               icon={<InfoIcon />}
-              label={t('import.skipped', '跳过: {{count}}', { count: importStats.skipped })}
+              label={t('import.skipped', { count: importStats.skipped })}
               color="warning"
               variant="outlined"
             />
@@ -242,7 +242,7 @@ export default function ImportProgressStep({ projectId, rawData, fieldMapping, s
           {importStats.failed > 0 && (
             <Chip
               icon={<ErrorIcon />}
-              label={t('import.failed', '失败: {{count}}', { count: importStats.failed })}
+              label={t('import.failed', { count: importStats.failed })}
               color="error"
               variant="outlined"
             />
