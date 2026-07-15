@@ -19,10 +19,10 @@
     "electron-pack": "electron-builder --dir",
     "electron-dist": "electron-builder",
     "clean-dist": "rm -rf dist",
-    "electron-build": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder -mwl",
-    "electron-build-mac": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --mac",
-    "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --win",
-    "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --linux",
+    "electron-build": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder -mwl",
+    "electron-build-mac": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --mac",
+    "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --win",
+    "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --linux",
     "docker": "docker build -t easy-dataset .",
     "prettier": "npx prettier --write ."
   },
@@ -127,15 +127,15 @@
       "!node_modules/.cache/**/*",
       "!node_modules/.bin/**/*",
       "!node_modules/.vite/**/*",
+      "node_modules/.prisma/**/*",
       "!**/*.{md,d.ts,map}",
       "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
     ],
     "extraResources": [
-      "prisma/schema.prisma",
-      "prisma/template.sqlite",
-      "prisma/sql.json",
+      "prisma/**/*",
       "node_modules/.prisma/**/*",
-      "node_modules/@prisma/client/**/*"
+      "node_modules/@prisma/client/**/*",
+      "node_modules/@prisma/engines/**/*"
     ],
     "directories": {
       "buildResources": "public",
@@ -144,7 +144,10 @@
     "asar": true,
     "asarUnpack": [
       "**/node_modules/sharp/**/*",
-      "**/node_modules/@img/**/*"
+      "**/node_modules/@img/**/*",
+      "**/node_modules/.prisma/**/*",
+      "**/node_modules/@prisma/client/**/*",
+      "**/node_modules/@prisma/engines/**/*"
     ],
     "compression": "maximum",
     "mac": {
