@@ -1,0 +1,88 @@
+name: Build
+
+on:
+  push:
+    branches: [main, custom]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm lint
+
+  build-mac:
+    needs: lint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm electron-build-mac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easy-dataset-mac
+          path: dist/
+
+  build-win:
+    needs: lint
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm electron-build-win
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easy-dataset-win
+          path: dist/
+
+  build-linux:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm electron-build-linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easy-dataset-linux
+          path: dist/
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build-mac, build-win, build-linux]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            easy-dataset-mac/**
+            easy-dataset-win/**
+            easy-dataset-linux/**
