@@ -9,8 +9,6 @@ import {
   Grid,
   Card,
   CardContent,
-  Slider,
-  InputAdornment,
   Alert,
   Snackbar,
   FormControl,
@@ -49,14 +47,6 @@ export default function TaskSettings({ projectId }) {
     setTaskSettings(prev => ({
       ...prev,
       [name]: value
-    }));
-  };
-
-  // 处理滑块变更
-  const handleSliderChange = name => (event, newValue) => {
-    setTaskSettings(prev => ({
-      ...prev,
-      [name]: newValue
     }));
   };
 
@@ -180,32 +170,25 @@ export default function TaskSettings({ projectId }) {
                 {/* Markdown模式设置 */}
                 {(!taskSettings.splitType || taskSettings.splitType === 'markdown') && (
                   <>
-                    <Typography id="text-split-min-length-slider" gutterBottom>
-                      {t('settings.minLength')}: {taskSettings.textSplitMinLength}
-                    </Typography>
-                    <Slider
+                    <TextField
+                      fullWidth
+                      label={t('settings.minLength')}
+                      name="textSplitMinLength"
                       value={taskSettings.textSplitMinLength || 2000}
-                      onChange={handleSliderChange('textSplitMinLength')}
-                      aria-labelledby="text-split-min-length-slider"
-                      valueLabelDisplay="auto"
-                      step={100}
-                      marks
-                      min={100}
-                      max={5000}
+                      onChange={handleSettingChange}
+                      type="number"
+                      InputProps={{ inputProps: { min: 1, step: 50 } }}
+                      sx={{ mb: 3 }}
                     />
 
-                    <Typography id="text-split-max-length-slider" gutterBottom sx={{ mt: 3 }}>
-                      {t('settings.maxLength')}: {taskSettings.textSplitMaxLength}
-                    </Typography>
-                    <Slider
+                    <TextField
+                      fullWidth
+                      label={t('settings.maxLength')}
+                      name="textSplitMaxLength"
                       value={taskSettings.textSplitMaxLength || 3000}
-                      onChange={handleSliderChange('textSplitMaxLength')}
-                      aria-labelledby="text-split-max-length-slider"
-                      valueLabelDisplay="auto"
-                      step={100}
-                      marks
-                      min={2000}
-                      max={20000}
+                      onChange={handleSettingChange}
+                      type="number"
+                      InputProps={{ inputProps: { min: 1, step: 50 } }}
                     />
                   </>
                 )}
@@ -213,32 +196,25 @@ export default function TaskSettings({ projectId }) {
                 {/* 通用 LangChain 参数设置 */}
                 {taskSettings.splitType && taskSettings.splitType !== 'markdown' && (
                   <>
-                    <Typography id="chunk-size-slider" gutterBottom>
-                      {t('settings.chunkSize')}: {taskSettings.chunkSize || 3000}
-                    </Typography>
-                    <Slider
+                    <TextField
+                      fullWidth
+                      label={t('settings.chunkSize')}
+                      name="chunkSize"
                       value={taskSettings.chunkSize || 3000}
-                      onChange={handleSliderChange('chunkSize')}
-                      aria-labelledby="chunk-size-slider"
-                      valueLabelDisplay="auto"
-                      step={100}
-                      marks
-                      min={500}
-                      max={20000}
+                      onChange={handleSettingChange}
+                      type="number"
+                      InputProps={{ inputProps: { min: 1, step: 50 } }}
+                      sx={{ mb: 3 }}
                     />
 
-                    <Typography id="chunk-overlap-slider" gutterBottom sx={{ mt: 3 }}>
-                      {t('settings.chunkOverlap')}: {taskSettings.chunkOverlap || 200}
-                    </Typography>
-                    <Slider
+                    <TextField
+                      fullWidth
+                      label={t('settings.chunkOverlap')}
+                      name="chunkOverlap"
                       value={taskSettings.chunkOverlap || 200}
-                      onChange={handleSliderChange('chunkOverlap')}
-                      aria-labelledby="chunk-overlap-slider"
-                      valueLabelDisplay="auto"
-                      step={50}
-                      marks
-                      min={0}
-                      max={1000}
+                      onChange={handleSettingChange}
+                      type="number"
+                      InputProps={{ inputProps: { min: 0, step: 50 } }}
                     />
                   </>
                 )}
@@ -343,38 +319,33 @@ export default function TaskSettings({ projectId }) {
                 {t('settings.questionGenSettings')}
               </Typography>
               <Box sx={{ px: 2, py: 1 }}>
-                <Typography id="question-generation-length-slider" gutterBottom>
-                  {t('settings.questionGenLength', { length: taskSettings.questionGenerationLength })}
-                </Typography>
-                <Slider
+                <TextField
+                  fullWidth
+                  label={t('settings.questionGenLength', { length: taskSettings.questionGenerationLength })}
+                  name="questionGenerationLength"
                   value={taskSettings.questionGenerationLength}
-                  onChange={handleSliderChange('questionGenerationLength')}
-                  aria-labelledby="question-generation-length-slider"
-                  valueLabelDisplay="auto"
-                  step={10}
-                  marks
-                  min={10}
-                  max={1000}
+                  onChange={handleSettingChange}
+                  type="number"
+                  InputProps={{ inputProps: { min: 1, step: 10 } }}
+                  sx={{ mb: 3 }}
                 />
+
+                <TextField
+                  fullWidth
+                  label={t('settings.questionMaskRemovingProbability', {
+                    probability: taskSettings.questionMaskRemovingProbability
+                  })}
+                  name="questionMaskRemovingProbability"
+                  value={taskSettings.questionMaskRemovingProbability}
+                  onChange={handleSettingChange}
+                  type="number"
+                  InputProps={{ inputProps: { min: 0, max: 100, step: 5 } }}
+                  sx={{ mb: 2 }}
+                />
+
                 <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 1 }}>
                   {t('settings.questionGenDescription')}
                 </Typography>
-
-                <Typography id="question-mark-removing-probability-slider" gutterBottom sx={{ mt: 3 }}>
-                  {t('settings.questionMaskRemovingProbability', {
-                    probability: taskSettings.questionMaskRemovingProbability
-                  })}
-                </Typography>
-                <Slider
-                  value={taskSettings.questionMaskRemovingProbability}
-                  onChange={handleSliderChange('questionMaskRemovingProbability')}
-                  aria-labelledby="question-generation-length-slider"
-                  valueLabelDisplay="auto"
-                  step={5}
-                  marks
-                  min={0}
-                  max={100}
-                />
 
                 <TextField
                   style={{ marginTop: 20 }}
@@ -464,18 +435,14 @@ export default function TaskSettings({ projectId }) {
                 />
 
                 {/* 对话轮数 */}
-                <Typography id="multi-turn-rounds-slider" gutterBottom sx={{ mt: 2 }}>
-                  {t('settings.multiTurnRounds', { rounds: taskSettings.multiTurnRounds || 3 })}
-                </Typography>
-                <Slider
+                <TextField
+                  fullWidth
+                  label={t('settings.multiTurnRounds', { rounds: taskSettings.multiTurnRounds || 3 })}
+                  name="multiTurnRounds"
                   value={taskSettings.multiTurnRounds || 3}
-                  onChange={handleSliderChange('multiTurnRounds')}
-                  aria-labelledby="multi-turn-rounds-slider"
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={2}
-                  max={8}
+                  onChange={handleSettingChange}
+                  type="number"
+                  InputProps={{ inputProps: { min: 1, step: 1 } }}
                   sx={{ mb: 2 }}
                 />
 

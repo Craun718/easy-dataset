@@ -348,6 +348,7 @@ export default function TextSplitPage({ params }) {
                 questionFilter={questionFilter}
                 setQuestionFilter={setQuestionFilter}
                 selectedModel={selectedModelInfo}
+                onChunksUpdate={fetchChunks}
               />
             )}
 

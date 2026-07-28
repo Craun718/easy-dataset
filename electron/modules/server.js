@@ -134,6 +134,8 @@ async function startNextServer(port, app) {
       console.log(`[Request] ${req.method} ${req.url}`);
       handle(req, res);
     });
+    server.requestTimeout = 10 * 60 * 1000; // 10 minutes
+    server.headersTimeout = 10 * 60 * 1000;
 
     return new Promise(resolve => {
       server.listen(port, err => {

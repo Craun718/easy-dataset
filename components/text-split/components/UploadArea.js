@@ -48,7 +48,7 @@ export default function UploadArea({
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (!selectedModel?.id || uploading) return;
+    if (uploading) return;
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
       // 构造一个模拟的 event 以复用 onFileSelect
@@ -74,7 +74,7 @@ export default function UploadArea({
           bgcolor: alpha(theme.palette.primary.main, 0.08),
           borderColor: alpha(theme.palette.primary.main, 0.3)
         },
-        cursor: uploading || !selectedModel?.id ? 'not-allowed' : 'pointer',
+        cursor: uploading ? 'not-allowed' : 'pointer',
         position: 'relative'
       }}
       onDragOver={handleDragOver}
@@ -124,16 +124,14 @@ export default function UploadArea({
         {t('textSplit.uploadNewDocument')}
       </Typography>
 
-      <Tooltip
-        title={!selectedModel?.id ? t('textSplit.selectModelFirst', { defaultValue: '请先在右上角选择模型' }) : ''}
-      >
+      <Tooltip>
         <span>
           <Button
             component="label"
             variant="contained"
             startIcon={<UploadFileIcon />}
             sx={{ mb: 2, mt: 2 }}
-            disabled={!selectedModel?.id || uploading}
+            disabled={uploading}
           >
             {t('textSplit.selectFile')}
             <input
@@ -142,7 +140,7 @@ export default function UploadArea({
               accept=".md,.txt,.docx,.pdf,.epub"
               multiple
               onChange={onFileSelect}
-              disabled={!selectedModel?.id || uploading}
+              disabled={uploading}
             />
           </Button>
         </span>
@@ -182,23 +180,15 @@ export default function UploadArea({
           </List>
 
           <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-            <Tooltip
-              title={
-                !selectedModel?.id ? t('textSplit.selectModelFirst', { defaultValue: '请先在右上角选择模型' }) : ''
-              }
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onUpload}
+              disabled={uploading}
+              sx={{ minWidth: 120 }}
             >
-              <span>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={onUpload}
-                  disabled={uploading || !selectedModel?.id}
-                  sx={{ minWidth: 120 }}
-                >
-                  {uploading ? <CircularProgress size={24} /> : t('textSplit.uploadAndProcess')}
-                </Button>
-              </span>
-            </Tooltip>
+              {uploading ? <CircularProgress size={24} /> : t('textSplit.uploadAndProcess')}
+            </Button>
           </Box>
         </Box>
       )}
