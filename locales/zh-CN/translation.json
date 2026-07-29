@@ -320,7 +320,15 @@
     "collapse": "收起内容",
     "project": "项目",
     "error": "错误",
-    "contextNavigation": "上下文导航"
+    "contextNavigation": "上下文导航",
+    "creating": "创建中...",
+    "deleteFailed": "删除失败",
+    "help": "帮助",
+    "next": "下一个",
+    "none": "无",
+    "prev": "上一个",
+    "projectIdRequired": "项目ID为必填项",
+    "unknown": "未知"
   },
   "home": {
     "title": "Easy Dataset",
@@ -555,7 +563,13 @@
       "keepOption": "保持不变",
       "keepDesc": "保持当前领域树结构不变，不做任何修改"
     },
-    "expandFileList": "展开文件列表"
+    "expandFileList": "展开文件列表",
+    "defaultStrategy": "默认策略",
+    "fetchChunkError": "获取文本块错误",
+    "fetchChunkFailed": "获取文本块失败",
+    "pdfStrategy": "PDF处理策略",
+    "visionModel": "视觉模型",
+    "visionStrategy": "视觉模型"
   },
   "domain": {
     "title": "领域知识树",
@@ -659,7 +673,8 @@
     "sampleAnalysis": "模型的思维链内容",
     "sampleFinal": "模型回答",
     "sampleThinking": "模型的思维链内容",
-    "fetchLabelStatsError": "获取标签统计失败:"
+    "fetchLabelStatsError": "获取标签统计失败:",
+    "reasoningLanguage": "推理语言"
   },
   "datasets": {
     "loadingDataset": "正在加载数据集详情...",
@@ -838,7 +853,15 @@
     "notRated": "未评分",
     "minScore": "最低评分",
     "maxScore": "最高评分",
-    "unconfirmed": "未确认"
+    "unconfirmed": "未确认",
+    "batchDeleteFailed": "批量删除失败",
+    "batchDeletePartialSuccess": "批量删除部分成功（{{success}} 成功，{{fail}} 失败）",
+    "confirmationStatus": "确认状态",
+    "deleting": "删除中...",
+    "exporting": "导出中...",
+    "multiTurnConversations": "多轮对话",
+    "noDataToDelete": "没有可删除的数据",
+    "pleaseSelectData": "请先选择数据"
   },
   "rating": {
     "veryPoor": "很差",
@@ -937,7 +960,8 @@
     "evalVariantPreviewTitle": "确认生成的题目",
     "generate": "生成",
     "skipped": "跳过: {{count}}",
-    "preview": "预览"
+    "preview": "预览",
+    "invalidCount": "{{count}} 条无效记录"
   },
   "update": {
     "newVersion": "新版本",
@@ -1007,7 +1031,8 @@
     "streamingOutput": "流式输出",
     "clearConversation": "清空对话",
     "selectModelMax3": "选择模型（最多3个）",
-    "reasoningProcess": "推理过程"
+    "reasoningProcess": "推理过程",
+    "uploadImage": "上传图片"
   },
   "chunks": {
     "title": "文本块",
@@ -1709,7 +1734,12 @@
       "multiple_choice": "多选题",
       "short_answer": "简答题",
       "open_ended": "开放题"
-    }
+    },
+    "answerPlaceholder": "请输入答案...",
+    "deleteSelectedCount": "删除选中 ({{count}})",
+    "moreOptions": "更多",
+    "notePlaceholder": "请输入备注...",
+    "questionPlaceholder": "请输入问题..."
   },
   "evalDatasets": {
     "import": {
