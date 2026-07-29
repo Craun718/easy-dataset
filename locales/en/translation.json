@@ -8,7 +8,8 @@
     "turkish": "Turkish",
     "portugues": "Portuguese",
     "en": "EN",
-    "zh": "中"
+    "zh": "中",
+    "italian": "Italiano"
   },
   "theme": {
     "switchToLight": "Switch to Light Mode",
@@ -556,7 +557,9 @@
       "rebuildDesc": "Generate a completely new domain tree based on all document contents",
       "keepOption": "Keep Unchanged",
       "keepDesc": "Keep the current domain tree structure unchanged without any modifications"
-    }
+    },
+    "expandFileList": "Expand File List",
+    "modelRequired": "Please select a model first to enable this feature"
   },
   "domain": {
     "title": "Domain Knowledge Tree",
@@ -751,7 +754,8 @@
     "answerBoolHint": "For True/False, please enter ✅ or ❌",
     "evalVariantPreviewTitle": "Confirm Generated Questions",
     "generate": "Generate",
-    "skipped": "Skipped: {{count}}"
+    "skipped": "Skipped: {{count}}",
+    "preview": "Preview"
   },
   "export_extended": {
     "answerFieldName": "Answer Field Name",

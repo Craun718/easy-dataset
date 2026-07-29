@@ -7,7 +7,8 @@
     "chineseSimplified": "简体中文",
     "turkish": "Türkçe",
     "en": "EN",
-    "zh": "中"
+    "zh": "中",
+    "italian": "意大利语"
   },
   "theme": {
     "switchToLight": "切换到亮色模式",
@@ -553,7 +554,8 @@
       "rebuildDesc": "基于所有文件的目录信息重新生成完整的领域树",
       "keepOption": "保持不变",
       "keepDesc": "保持当前领域树结构不变，不做任何修改"
-    }
+    },
+    "expandFileList": "展开文件列表"
   },
   "domain": {
     "title": "领域知识树",
@@ -934,7 +936,8 @@
     "answerBoolHint": "判断题答案请输入 ✅ 或 ❌",
     "evalVariantPreviewTitle": "确认生成的题目",
     "generate": "生成",
-    "skipped": "跳过: {{count}}"
+    "skipped": "跳过: {{count}}",
+    "preview": "预览"
   },
   "update": {
     "newVersion": "新版本",
