@@ -2,9 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [main, custom]
     tags:
-      - 'v*'
+     - 'v*'
   pull_request:
     branches: [main]
 
