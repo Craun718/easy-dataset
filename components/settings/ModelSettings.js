@@ -117,7 +117,9 @@ export default function ModelSettings({ projectId }) {
   useEffect(() => {
     getProvidersList();
     getModelConfigList();
-  }, [getModelConfigList, getProvidersList]);
+    // Both functions are defined below; reference projectId only to avoid TDZ and render loops.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId]);
 
   // 获取提供商列表
   const getProvidersList = () => {

@@ -93,7 +93,7 @@ export default function QuestionEditDialog({
         label: ''
       });
     }
-  }, [initialData, getChunks, projectId]);
+  }, [initialData, projectId]);
 
   const handleSubmit = () => {
     onSubmit(formData);

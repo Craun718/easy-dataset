@@ -116,7 +116,7 @@ export default function FileList({
     }, 500); // 500ms 防抖
 
     return () => clearTimeout(timer);
-  }, [searchTerm, handleSearch]);
+  }, [searchTerm]);
 
   // 清空搜索
   const handleClearSearch = () => {

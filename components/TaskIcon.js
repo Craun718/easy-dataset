@@ -68,7 +68,7 @@ export default function TaskIcon({ projectId, theme }) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [projectId, fetchPendingTasks]);
+  }, [projectId]);
 
   useEffect(() => {
     setMenuAnchorEl(null);

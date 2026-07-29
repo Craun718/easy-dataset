@@ -144,7 +144,7 @@ export default function TextSplitPage({ params }) {
   // 文件列表刷新：文件分页、搜索关键词变化时触发
   useEffect(() => {
     fetchUploadedFiles(currentPage, searchFileName);
-  }, [projectId, currentPage, searchFileName, fetchUploadedFiles]);
+  }, [projectId, currentPage, searchFileName]);
 
   useEffect(() => {
     let timerId;

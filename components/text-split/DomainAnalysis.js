@@ -205,7 +205,8 @@ export default function DomainAnalysis({ projectId, toc = '', loading = false })
 
   useEffect(() => {
     getTags();
-  }, [getTags]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId]);
   const getTags = async () => {
     const response = await axios.get(`/api/projects/${projectId}/tags`);
     setTags(response.data.tags);

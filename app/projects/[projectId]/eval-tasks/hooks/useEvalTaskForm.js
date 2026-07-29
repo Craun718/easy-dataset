@@ -37,7 +37,7 @@ export function useEvalTaskForm(projectId, open) {
       loadModels();
       loadEvalDatasets();
     }
-  }, [open, projectId, loadModels, loadEvalDatasets]);
+  }, [open, projectId]);
 
   // 当筛选条件变化时，调用后端统计数量
   useEffect(() => {

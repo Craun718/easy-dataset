@@ -82,7 +82,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
         setIsDragging(true);
       }
     },
-    [processFile]
+    []
   );
 
   const handleDragLeave = useCallback(
@@ -95,7 +95,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
         setIsDragging(false);
       }
     },
-    [processFile]
+    []
   );
 
   const handleDragOver = useCallback(
@@ -103,7 +103,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
       e.preventDefault();
       e.stopPropagation();
     },
-    [processFile]
+    []
   );
 
   const handleDrop = useCallback(
@@ -118,7 +118,7 @@ export default function ChunkImportDialog({ open, onClose, projectId, onImportSu
         processFile(files[0]);
       }
     },
-    [processFile]
+    []
   );
 
   /**
