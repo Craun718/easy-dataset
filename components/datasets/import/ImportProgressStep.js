@@ -39,7 +39,7 @@ export default function ImportProgressStep({ projectId, rawData, fieldMapping, s
       startedRef.current = true;
       startImport();
     }
-  }, [rawData, fieldMapping, projectId, startImport]);
+  }, [rawData, fieldMapping, projectId]);
 
   const startImport = async () => {
     try {

@@ -109,7 +109,7 @@ export function useQuestionTemplates(projectId, sourceType = null) {
     if (projectId) {
       fetchTemplates();
     }
-  }, [projectId, sourceType, fetchTemplates]);
+  }, [projectId, sourceType]);
 
   return {
     templates,
