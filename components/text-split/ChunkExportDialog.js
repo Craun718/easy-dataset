@@ -18,6 +18,7 @@ import {
   Alert
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { sortByName } from '@/lib/util/natural-sort';
 
 /**
  * 文本块导出对话框
@@ -50,7 +51,8 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
     try {
       if (!needServerExport) {
         // 小数量：直接客户端导出（快速，无需请求）
-        const exportData = chunks.map(chunk => ({
+        // 导出前按 name 自然排序
+        const exportData = sortByName(chunks).map(chunk => ({
           name: chunk.name,
           fileName: chunk.fileName,
           content: chunk.content,
