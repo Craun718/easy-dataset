@@ -3,8 +3,10 @@
   "version": "1.7.3-ntk-v5",
   "private": true,
   "author": {
-    "name": "ConardLi & Ntk"
+    "name": "ConardLi & Ntk",
+    "email": "3653544699@qq.com"
   },
+  
   "homepage": "https://github.com/ConardLi/easy-dataset",
   "scripts": {
     "db:studio": "prisma studio",
@@ -22,7 +24,7 @@
     "electron-build": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder -mwl",
     "electron-build-mac": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --mac",
     "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --win",
-    "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --linux",
+    "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && scripts/setup-rpm-wrapper.sh && PATH=\"/tmp/rpmbuild-bin:$PATH\" electron-builder --linux",
     "docker": "docker build -t easy-dataset .",
     "prettier": "prettier --write ."
   },
@@ -187,6 +189,16 @@
       "perMachine": false
     },
     "publish": null
+    ,
+    "linux": {
+      "icon": "public/imgs/logo.png",
+      "category": "Utility",
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "rpm", "arch": ["x64"] }
+      ]
+    }
   },
   "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }
