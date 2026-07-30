@@ -66,6 +66,8 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm electron-build-linux
+      - if: failure()
+        run: cat /tmp/rpmbuild-stderr.log 2>/dev/null || true
       - uses: actions/upload-artifact@v7
         with:
           name: easy-dataset-linux
