@@ -102,7 +102,7 @@ export default function CreateProjectDialog({ open, onClose }) {
       }}
     >
       <DialogTitle>
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="h5" component="span" fontWeight="bold">
           {t('projects.createNew')}
         </Typography>
       </DialogTitle>

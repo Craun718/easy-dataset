@@ -90,7 +90,7 @@ export default function ModelSelect({
     if (required) {
       validateModel();
     }
-  }, [required, validateModel]);
+  }, [required]);
 
   const renderSelectedValue = value => {
     if (!value) {

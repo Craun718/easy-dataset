@@ -52,7 +52,8 @@ export default function FileUploader({
 
   useEffect(() => {
     fetchUploadedFiles();
-  }, [currentPage, searchFileName, fetchUploadedFiles]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, searchFileName]);
 
   /**
    * 处理 PDF 处理方式选择

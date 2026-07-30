@@ -136,7 +136,7 @@ export default function ImagesPage() {
 
   useEffect(() => {
     fetchImages();
-  }, [fetchImages, projectId, page, imageName, hasQuestions, hasDatasets]);
+  }, [projectId, page, imageName, hasQuestions, hasDatasets]);
 
   useEffect(() => {
     setSelectedIds([]);

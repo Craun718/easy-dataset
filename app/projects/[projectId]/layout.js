@@ -74,7 +74,9 @@ export default function ProjectLayout({ children, params }) {
     }
 
     fetchData();
-  }, [fetchData, projectId, router]);
+    // fetchData is recreated each render; only refetch when projectId changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId]);
 
   if (loading) {
     return (

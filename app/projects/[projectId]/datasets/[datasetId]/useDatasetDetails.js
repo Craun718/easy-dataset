@@ -414,7 +414,7 @@ export default function useDatasetDetails(projectId, datasetId) {
   // 初始化和快捷键事件
   useEffect(() => {
     fetchDatasets();
-  }, [projectId, datasetId, fetchDatasets]);
+  }, [projectId, datasetId]);
 
   // 快捷键状态变化
   useEffect(() => {

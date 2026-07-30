@@ -90,7 +90,7 @@ export default function QuestionTreeView({
     // 未分类问题也默认收起
     initialExpandedState['uncategorized'] = false;
     setExpandedTags(initialExpandedState);
-  }, [tags, expandedTags, fetchTagQuestions, projectId, searchTerm]);
+  }, [tags, expandedTags, projectId, searchTerm]);
 
   // 根据标签对问题进行分类
   useEffect(() => {
@@ -193,7 +193,7 @@ export default function QuestionTreeView({
         [tagLabel]: shouldExpand
       }));
     },
-    [expandedTags, loadedTags, projectId, fetchTagQuestions]
+    [expandedTags, loadedTags, projectId]
   );
 
   // 获取特定标签的问题数据

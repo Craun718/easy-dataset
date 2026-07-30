@@ -144,7 +144,7 @@ export default function TextSplitPage({ params }) {
   // 文件列表刷新：文件分页、搜索关键词变化时触发
   useEffect(() => {
     fetchUploadedFiles(currentPage, searchFileName);
-  }, [projectId, currentPage, searchFileName, fetchUploadedFiles]);
+  }, [projectId, currentPage, searchFileName]);
 
   useEffect(() => {
     let timerId;
@@ -402,7 +402,7 @@ export default function TextSplitPage({ params }) {
         sx={{ '& .MuiDialog-paper': { bgcolor: 'background.default' } }}
       >
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 3, py: 1 }}>
-          <Typography variant="h6">{t('textSplit.fileList')}</Typography>
+          <Typography variant="h6" component="span">{t('textSplit.fileList')}</Typography>
           <IconButton edge="end" color="inherit" onClick={() => setFileListDialogOpen(false)} aria-label="close">
             <CloseIcon />
           </IconButton>
