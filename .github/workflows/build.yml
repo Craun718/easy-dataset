@@ -65,7 +65,15 @@ jobs:
       - run: pnpm install
       - run: pnpm electron-build-linux
       - if: failure()
-        run: cat /tmp/rpmbuild-stderr.log 2>/dev/null || true
+        run: |
+          echo "=== rpmbuild stderr log ==="
+          cat /tmp/rpmbuild-stderr.log 2>/dev/null || echo "(not found)"
+          echo "=== rpm version ==="
+          rpmbuild --version 2>&1 || true
+          echo "=== rpm dbpath ==="
+          ls -la "$(rpm --eval '%{_dbpath}' 2>/dev/null)" 2>&1 || true
+          echo "=== wrapper symlink ==="
+          ls -la /tmp/rpmbuild-bin/rpmbuild 2>/dev/null || echo "(not found)"
       - uses: actions/upload-artifact@v7
         with:
           name: easy-dataset-linux
