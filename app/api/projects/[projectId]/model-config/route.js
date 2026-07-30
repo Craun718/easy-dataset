@@ -39,6 +39,7 @@ export async function GET(request, { params }) {
           type: 'text',
           temperature: DEFAULT_MODEL_SETTINGS.temperature,
           maxTokens: DEFAULT_MODEL_SETTINGS.maxTokens,
+          maxRetries: DEFAULT_MODEL_SETTINGS.maxRetries,
           topK: 0,
           topP: DEFAULT_MODEL_SETTINGS.topP,
           status: 1
@@ -93,6 +94,12 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: 'maxTokens must be a positive integer' }, { status: 400 });
     }
     modelConfig.maxTokens = parsedMaxTokens;
+    const parsedMaxRetries = Number(modelConfig.maxRetries ?? DEFAULT_MODEL_SETTINGS.maxRetries);
+    if (!Number.isInteger(parsedMaxRetries) || parsedMaxRetries < 3 || parsedMaxRetries > 99) {
+      modelConfig.maxRetries = DEFAULT_MODEL_SETTINGS.maxRetries;
+    } else {
+      modelConfig.maxRetries = parsedMaxRetries;
+    }
     const res = await saveModelConfig(modelConfig);
 
     return NextResponse.json(res);

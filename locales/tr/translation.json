@@ -1059,6 +1059,8 @@
     "temperature": "Sıcaklık",
     "maxTokens": "Maks Token",
     "maxTokensInputTip": "Kaydırıcı aralığı: 1-{{max}}. Ayrıca herhangi bir pozitif tam sayı girebilirsiniz.",
+    "maxRetries": "Maksimum Yeniden Deneme",
+    "maxRetriesInputTip": "Kaydırıcı aralığı: 3-99. Ayrıca 3 ile 99 arasında bir tam sayı girebilirsiniz.",
     "topP": "Top P",
     "type": "Model Türü",
     "text": "Büyük Dil Modeli",

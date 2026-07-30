@@ -191,6 +191,7 @@ model ModelConfig {
   type         String
   temperature  Float
   maxTokens    Int
+  maxRetries   Int      @default(5)
   topP         Float
   topK         Float
   status       Int

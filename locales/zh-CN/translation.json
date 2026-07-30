@@ -1037,6 +1037,8 @@
     "temperature": "模型温度",
     "maxTokens": "最大生成 Token 数",
     "maxTokensInputTip": "滑块范围：1-{{max}}。你也可以输入任意正整数。",
+    "maxRetries": "重试次数",
+    "maxRetriesInputTip": "滑块范围：3-99。你也可以输入 3 到 99 之间的正整数。",
     "topP": "Top P",
     "type": "模型标签",
     "text": "语言模型",

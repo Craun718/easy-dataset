@@ -974,6 +974,8 @@
     "apiKeyNotConfigured": "Non configurato",
     "temperature": "Temperatura",
     "maxTokens": "Max Token",
+    "maxRetries": "Tentativi Massimi",
+    "maxRetriesInputTip": "Intervallo del controllo: 3-99. Puoi anche inserire un numero intero tra 3 e 99.",
     "type": "Tipo Modello",
     "text": "LLM (Testuale)",
     "vision": "VLM (Vision)",

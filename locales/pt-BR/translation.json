@@ -985,6 +985,8 @@
     "temperature": "Temperatura do Modelo",
     "maxTokens": "Número Máximo de Tokens Gerados",
     "maxTokensInputTip": "Intervalo do controle deslizante: 1-{{max}}. Você também pode inserir qualquer número inteiro positivo.",
+    "maxRetries": "Tentativas Máximas",
+    "maxRetriesInputTip": "Intervalo do controle: 3-99. Você também pode inserir um número inteiro entre 3 e 99.",
     "topP": "Top P",
     "type": "Tag do Modelo",
     "text": "Modelo de Linguagem",

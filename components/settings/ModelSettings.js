@@ -49,6 +49,8 @@ export default function ModelSettings({ projectId }) {
   // 展示端点的最大长度
   const MAX_ENDPOINT_DISPLAY = 80;
   const MAX_GENERATION_TOKENS = 131072;
+  const MAX_RETRIES_MIN = 3;
+  const MAX_RETRIES_MAX = 99;
   // 模型对话框状态
   const [openModelDialog, setOpenModelDialog] = useState(false);
   const [editingModel, setEditingModel] = useState(null);
@@ -74,6 +76,7 @@ export default function ModelSettings({ projectId }) {
     type: 'text',
     temperature: 0.0,
     maxTokens: DEFAULT_MODEL_SETTINGS.maxTokens,
+    maxRetries: DEFAULT_MODEL_SETTINGS.maxRetries,
     topP: 0,
     topK: 0,
     status: 1
@@ -112,6 +115,18 @@ export default function ModelSettings({ projectId }) {
 
   const getSafeMaxTokensValue = value => {
     return normalizePositiveInteger(value) ?? DEFAULT_MODEL_SETTINGS.maxTokens;
+  };
+
+  const normalizeMaxRetries = value => {
+    const parsedValue = Number(value);
+    if (!Number.isInteger(parsedValue)) {
+      return null;
+    }
+    return Math.min(Math.max(parsedValue, MAX_RETRIES_MIN), MAX_RETRIES_MAX);
+  };
+
+  const getSafeMaxRetriesValue = value => {
+    return normalizeMaxRetries(value) ?? DEFAULT_MODEL_SETTINGS.maxRetries;
   };
 
   useEffect(() => {
@@ -437,6 +452,7 @@ export default function ModelSettings({ projectId }) {
         ...initialForm,
         temperature: model.temperature !== undefined ? model.temperature : DEFAULT_MODEL_SETTINGS.temperature,
         maxTokens: model.maxTokens !== undefined ? model.maxTokens : DEFAULT_MODEL_SETTINGS.maxTokens,
+        maxRetries: model.maxRetries !== undefined ? model.maxRetries : DEFAULT_MODEL_SETTINGS.maxRetries,
         topP: model.topP !== undefined && model.topP !== 0 ? model.topP : DEFAULT_MODEL_SETTINGS.topP
       });
       getProviderModels(model.providerId);
@@ -508,14 +524,53 @@ export default function ModelSettings({ projectId }) {
     }));
   };
 
-  const handleMaxTokensInputBlur = () => {
-    const normalizedValue = normalizePositiveInteger(modelConfigForm.maxTokens);
-    if (normalizedValue !== null) {
+ const handleMaxTokensInputBlur = () => {
+   const normalizedValue = normalizePositiveInteger(modelConfigForm.maxTokens);
+   if (normalizedValue !== null) {
+     return;
+   }
+   setModelConfigForm(prev => ({
+     ...prev,
+     maxTokens: DEFAULT_MODEL_SETTINGS.maxTokens
+   }));
+ };
+
+  const handleMaxRetriesSliderChange = (event, newValue) => {
+    const value = Array.isArray(newValue) ? newValue[0] : newValue;
+    const normalizedValue = normalizeMaxRetries(value);
+    if (normalizedValue === null) {
       return;
     }
     setModelConfigForm(prev => ({
       ...prev,
-      maxTokens: DEFAULT_MODEL_SETTINGS.maxTokens
+      maxRetries: normalizedValue
+    }));
+  };
+
+  const handleMaxRetriesInputChange = e => {
+    const { value } = e.target;
+    if (value === '') {
+      setModelConfigForm(prev => ({
+        ...prev,
+        maxRetries: ''
+      }));
+      return;
+    }
+    const normalizedValue = normalizeMaxRetries(value);
+    if (normalizedValue === null) {
+      return;
+    }
+    setModelConfigForm(prev => ({
+      ...prev,
+      maxRetries: normalizedValue
+    }));
+  };
+
+  const handleMaxRetriesInputBlur = () => {
+    const normalizedValue = normalizeMaxRetries(modelConfigForm.maxRetries);
+    setModelConfigForm(prev => ({
+      ...prev,
+      maxRetries: normalizedValue ?? DEFAULT_MODEL_SETTINGS.maxRetries
     }));
   };
 
@@ -957,9 +1012,42 @@ export default function ModelSettings({ projectId }) {
                   name="type"
                 >
                   <MenuItem value="text">{t('models.text')}</MenuItem>
-                  <MenuItem value="vision">{t('models.vision')}</MenuItem>
-                </Select>
-              </FormControl>
+                 <MenuItem value="vision">{t('models.vision')}</MenuItem>
+               </Select>
+             </FormControl>
+           </Grid>
+            <Grid item xs={12}>
+              <Typography id="max-retries-slider" gutterBottom>
+                {t('models.maxRetries', { defaultValue: 'Max Retries' })}
+              </Typography>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Slider
+                  min={MAX_RETRIES_MIN}
+                  max={MAX_RETRIES_MAX}
+                  name="maxRetries"
+                  value={getSafeMaxRetriesValue(modelConfigForm.maxRetries)}
+                  onChange={handleMaxRetriesSliderChange}
+                  step={1}
+                  valueLabelDisplay="auto"
+                  aria-label="maxRetries"
+                  sx={{ flex: 1 }}
+                />
+                <TextField
+                  size="small"
+                  type="number"
+                  value={modelConfigForm.maxRetries}
+                  onChange={handleMaxRetriesInputChange}
+                  onBlur={handleMaxRetriesInputBlur}
+                  inputProps={{ min: MAX_RETRIES_MIN, max: MAX_RETRIES_MAX, step: 1 }}
+                  sx={{ width: 170 }}
+                />
+              </Box>
+              <Typography variant="caption" color="text.secondary">
+                {t('models.maxRetriesInputTip', {
+                  defaultValue: `Slider range: ${MAX_RETRIES_MIN}-${MAX_RETRIES_MAX}. You can also input an integer between ${MAX_RETRIES_MIN} and ${MAX_RETRIES_MAX}.`
+                })}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography id="question-generation-length-slider" gutterBottom>

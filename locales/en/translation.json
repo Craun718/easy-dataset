@@ -1080,6 +1080,8 @@
     "temperature": "Temperature",
     "maxTokens": "Max Tokens",
     "maxTokensInputTip": "Slider range: 1-{{max}}. You can also input any positive integer.",
+    "maxRetries": "Max Retries",
+    "maxRetriesInputTip": "Slider range: 3-99. You can also input an integer between 3 and 99.",
     "topP": "Top P",
     "type": "Model Type",
     "text": "Large Language Model",
