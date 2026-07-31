@@ -36,7 +36,7 @@ export async function POST(request, { params }) {
     }
 
     // 格式化数据集
-    const formattedData = formatDataset(questions, formatType, systemPrompt, includeCOT, customFields);
+    const formattedData = formatDataset(questions, formatType, systemPrompt, includeCOT, customFields, reasoningLanguage);
 
     // 创建临时目录
     const tempDir = path.join(os.tmpdir(), `hf-upload-${projectId}-${Date.now()}`);
@@ -125,7 +125,7 @@ export async function POST(request, { params }) {
 }
 
 // 格式化数据集
-function formatDataset(questions, formatType, systemPrompt, includeCOT, customFields) {
+function formatDataset(questions, formatType, systemPrompt, includeCOT, customFields, reasoningLanguage) {
   if (formatType === 'alpaca') {
     return questions.map(q => {
       const item = {

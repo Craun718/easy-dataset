@@ -134,7 +134,7 @@ export async function GET(request, { params }) {
       data: {
         completed: false,
         currentIndex,
-        totalCount: evalDatasetIds.length,
+        totalCount: questionIds.length,
         question: currentQuestion,
         // Blind test: do not reveal which model is which
         leftAnswer: {

@@ -144,7 +144,7 @@ export default function GaPairsManager({ projectId, fileId, onGaPairsChange }) {
             }
           } catch (parseError) {
             console.error('Failed to parse error response:', parseError);
-            errorMessage = errorResult.error || t('gaPairs.internalServerError');
+            errorMessage = t('gaPairs.internalServerError');
           }
         }
 
