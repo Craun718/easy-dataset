@@ -25,7 +25,7 @@ export async function POST(request, { params }) {
     const { projectId } = params;
     const body = await request.json();
 
-    const { format = 'json', fileIds = [], keyword = '' } = body;
+    const { format = 'json', fileIds = [], keyword = '', offset, limit } = body;
 
     if (!['json', 'jsonl'].includes(format)) {
       return NextResponse.json({ code: 400, error: 'Unsupported export format' }, { status: 400 });
@@ -42,6 +42,13 @@ export async function POST(request, { params }) {
 
     if (total === 0) {
       return NextResponse.json({ code: 400, error: 'No chunks match the criteria' }, { status: 400 });
+    }
+
+    // 分页模式：前端按 offset/limit 分批拉取时，仅返回对应批次，避免重复
+    if (offset != null || limit != null) {
+      const batchItems = await getChunksForExport(projectId, { ...filters, offset, limit });
+      const formattedBatch = batchItems.map(formatExportItem);
+      return NextResponse.json(formattedBatch);
     }
 
     // 小数量的直接返回
