@@ -31,14 +31,18 @@ export async function POST(request) {
       headers.Authorization = `Bearer ${apiKey}`;
     }
 
-    const response = await axios.get(url, { headers });
+    const response = await axios.get(url, {
+      headers,
+      timeout: 600000
+    });
+    const data = response.data;
 
     // Format response per provider
     let formattedModels = [];
     if (providerId === 'ollama') {
       // Ollama /api/tags format: { models: [{ name: 'model-name', ... }] }
-      if (response.data.models && Array.isArray(response.data.models)) {
-        formattedModels = response.data.models.map(item => ({
+      if (data.models && Array.isArray(data.models)) {
+        formattedModels = data.models.map(item => ({
           modelId: item.name,
           modelName: item.name,
           providerId
@@ -46,8 +50,8 @@ export async function POST(request) {
       }
     } else {
       // Default handling (OpenAI-compatible)
-      if (response.data.data && Array.isArray(response.data.data)) {
-        formattedModels = response.data.data.map(item => ({
+      if (data.data && Array.isArray(data.data)) {
+        formattedModels = data.data.map(item => ({
           modelId: item.id,
           modelName: item.id,
           providerId
