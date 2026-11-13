@@ -1,7 +1,7 @@
 // 最佳实践配置示例
 module.exports = {
   experimental: {
-    serverComponentsExternalPackages: ['@opendocsg/pdf2md', 'pdfjs-dist', '@hyzyla/pdfium'],
+    serverComponentsExternalPackages: ['@opendocsg/pdf2md', 'pdfjs-dist', '@hyzyla/pdfium', 'sharp', 'fs-extra'],
     esmExternals: 'loose'
   },
   webpack: (config, { isServer }) => {
@@ -13,6 +13,8 @@ module.exports = {
     } else {
       config.externals.push('pdfjs-dist');
       config.externals.push('@hyzyla/pdfium');
+      config.externals.push('sharp');
+      config.externals.push('fs-extra');
     }
     return config;
   }
