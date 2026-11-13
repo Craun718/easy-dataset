@@ -30,7 +30,7 @@ const DeleteConfirmDialog = ({ open, datasets, onClose, onConfirm, batch, progre
       }}
     >
       <DialogTitle sx={{ pb: 1 }}>
-        <Typography variant="h6" fontWeight="bold">
+        <Typography variant="h6" component="span" fontWeight="bold">
           {t('common.confirmDelete')}
         </Typography>
       </DialogTitle>

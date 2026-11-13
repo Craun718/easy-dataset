@@ -52,6 +52,7 @@ export default function FileUploader({
 
   useEffect(() => {
     fetchUploadedFiles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, searchFileName]);
 
   /**

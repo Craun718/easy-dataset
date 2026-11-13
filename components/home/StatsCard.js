@@ -3,6 +3,7 @@
 import { Paper, Grid, Box, Typography, useMediaQuery, Avatar } from '@mui/material';
 import { styles } from '@/styles/home';
 import { useTheme } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -19,6 +20,7 @@ const mockModels = [
 
 export default function StatsCard({ projects }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // 统计卡片数据

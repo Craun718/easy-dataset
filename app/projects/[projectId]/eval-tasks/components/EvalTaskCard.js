@@ -27,6 +27,7 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { useTranslation } from 'react-i18next';
 import { getModelIcon } from '@/lib/util/modelIcon';
+import Image from 'next/image';
 import styles from '../styles';
 
 const STATUS_CONFIG = {
@@ -74,10 +75,12 @@ export default function EvalTaskCard({ task, onView, onDelete, onInterrupt }) {
         <Box sx={styles.taskCardHeader}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: 1, overflow: 'hidden' }}>
             <Avatar sx={{ bgcolor: 'transparent', width: 40, height: 40, border: '1px solid', borderColor: 'divider' }}>
-              <img
+              <Image
                 src={getModelIcon(modelInfo?.modelName || modelInfo?.modelId)}
                 alt={modelInfo?.modelId || 'model'}
-                style={{ width: 28, height: 28, objectFit: 'contain' }}
+                width={28}
+                height={28}
+                style={{ objectFit: 'contain' }}
               />
             </Avatar>
             <Box sx={styles.taskCardModel}>

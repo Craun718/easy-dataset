@@ -471,7 +471,7 @@ export default function useDatasetDetails(projectId, datasetId) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [shortcutsEnabled, confirming, currentDataset]);
+  }, [shortcutsEnabled, confirming, currentDataset, handleConfirm, handleDelete, handleNavigate]);
 
   return {
     loading,

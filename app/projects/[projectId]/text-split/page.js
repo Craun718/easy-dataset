@@ -234,7 +234,7 @@ export default function TextSplitPage({ params }) {
     }
     window.history.replaceState({}, '', url);
     fetchChunks(questionFilter);
-  }, [questionFilter]);
+  }, [questionFilter, fetchChunks]);
 
   const handleSelected = array => {
     if (array.length > 0) {
@@ -402,7 +402,7 @@ export default function TextSplitPage({ params }) {
         sx={{ '& .MuiDialog-paper': { bgcolor: 'background.default' } }}
       >
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 3, py: 1 }}>
-          <Typography variant="h6">{t('textSplit.fileList')}</Typography>
+          <Typography variant="h6" component="span">{t('textSplit.fileList')}</Typography>
           <IconButton edge="end" color="inherit" onClick={() => setFileListDialogOpen(false)} aria-label="close">
             <CloseIcon />
           </IconButton>

@@ -8,7 +8,8 @@
     "turkish": "Turkish",
     "portugues": "Portuguese",
     "en": "EN",
-    "zh": "中"
+    "zh": "中",
+    "italian": "Italiano"
   },
   "theme": {
     "switchToLight": "Switch to Light Mode",
@@ -246,7 +247,9 @@
       "autoGenerateWarning": "This operation may create a large number of questions. Please confirm to continue.",
       "autoGenerateSuccess": "Successfully created questions for {{count}} data sources",
       "autoGeneratePartialFail": "Successfully created {{success}} questions, {{fail}} failed",
-      "autoGenerateFailed": "Failed to auto-generate questions"
+      "autoGenerateFailed": "Failed to auto-generate questions",
+      "confirmAutoGenerateEditImageMessage": "You have enabled automatic question generation. The system will create questions for all images that do not yet have questions for this template.",
+      "confirmAutoGenerateEditTextMessage": "You have enabled automatic question generation. The system will create questions for all text chunks that do not yet have questions for this template."
     },
     "generateSingleTurnDataset": "Generate Single-turn Dataset",
     "generateSingleTurnDatasetDesc": "Generate Q&A dataset based on questions",
@@ -256,7 +259,8 @@
     "multiTurnNotConfigured": "Please configure multi-turn conversation parameters in project settings first",
     "generateMultiTurn": "Generate Multi-Turn Conversation",
     "multiTurnGenerated": "Multi-turn conversation dataset generated successfully!",
-    "deleteConfirm": "Are you sure you want to delete this question? This action cannot be undone."
+    "deleteConfirm": "Are you sure you want to delete this question? This action cannot be undone.",
+    "selectModelFirst": "Please select a model first"
   },
   "common": {
     "dataSource": "Data Source",
@@ -317,13 +321,26 @@
     "closeMenu": "Close Menu",
     "documentation": "Documentation",
     "viewOnGitHub": "View on GitHub",
-    "back": "Back",
     "refresh": "Refresh",
     "expand": "Expand All",
     "collapse": "Collapse",
     "project": "Project",
     "error": "Error",
-    "contextNavigation": "Context navigation"
+    "contextNavigation": "Context navigation",
+    "clickToReplace": "Click to replace file",
+    "comingSoon": "Coming soon...",
+    "navigationFailed": "Navigation failed",
+    "ready": "Ready",
+    "select": "Please select",
+    "unconfirming": "Unconfirming...",
+    "creating": "Creating...",
+    "deleteFailed": "Delete failed",
+    "help": "Help",
+    "next": "Next",
+    "none": "None",
+    "prev": "Previous",
+    "projectIdRequired": "Project ID is required",
+    "unknown": "Unknown"
   },
   "home": {
     "title": "Easy Dataset",
@@ -363,7 +380,8 @@
     "backToHome": "Back to Home",
     "deleteConfirmTitle": "Confirm Delete",
     "title": "Project Management",
-    "openDirectory": "Open Project Directory"
+    "openDirectory": "Open Project Directory",
+    "noDescription": "No description"
   },
   "textSplit": {
     "dragToUpload": "Drag files to upload",
@@ -396,7 +414,7 @@
     "importCompleted": "Import completed!",
     "importingData": "Importing data...",
     "startImport": "Start Import",
-    "unsupportedFormat": "Unsupported file format",
+    "unsupportedFormat": "Unsupported file format: {{files}}",
     "emptyFile": "File contains no data",
     "parseFileFailed": "Failed to parse file",
     "allChunks": "All Text Chunks",
@@ -471,7 +489,6 @@
     "progressStatus": "Selected {{total}} text chunks, {{completed}} completed",
     "processingPleaseWait": "Processing, please wait!",
     "oneFileLimit": "File upload not allowed, there is already an uploaded file",
-    "unsupportedFormat": "Unsupported file format: {{files}}",
     "modelInfoParseError": "Failed to parse model information",
     "uploadFailed": "Upload failed",
     "uploadSuccess": "Successfully uploaded {{count}} files",
@@ -558,7 +575,15 @@
       "rebuildDesc": "Generate a completely new domain tree based on all document contents",
       "keepOption": "Keep Unchanged",
       "keepDesc": "Keep the current domain tree structure unchanged without any modifications"
-    }
+    },
+    "expandFileList": "Expand File List",
+    "modelRequired": "Please select a model first to enable this feature",
+    "defaultStrategy": "Default Strategy",
+    "fetchChunkError": "Error fetching chunk",
+    "fetchChunkFailed": "Failed to fetch chunk",
+    "pdfStrategy": "PDF Processing Strategy",
+    "visionModel": "Vision Model",
+    "visionStrategy": "Vision Model"
   },
   "domain": {
     "title": "Domain Knowledge Tree",
@@ -662,7 +687,11 @@
     "viewOnHuggingFace": "View on HuggingFace",
     "noTokenWarning": "Hugging Face Token not found. Please configure it in project settings.",
     "goToSettings": "Go to Settings",
-    "tokenHelp": "You can get your token from HuggingFace settings page"
+    "tokenHelp": "You can get your token from HuggingFace settings page",
+    "balancedExport": {
+      "atLeastOneTag": "Please set a quantity greater than 0 for at least one tag"
+    },
+    "reasoningLanguage": "Reasoning Language"
   },
   "import": {
     "title": "Import",
@@ -752,7 +781,12 @@
     "answerArrayHint": "For multiple choice, please enter an array, e.g. [\"A\", \"C\"]",
     "answerBoolHint": "For True/False, please enter ✅ or ❌",
     "evalVariantPreviewTitle": "Confirm Generated Questions",
-    "generate": "Generate"
+    "generate": "Generate",
+    "skipped": "Skipped: {{count}}",
+    "preview": "Preview",
+    "chunkName": "Name",
+    "fileName": "File",
+    "invalidCount": "{{count}} invalid records"
   },
   "export_extended": {
     "answerFieldName": "Answer Field Name",
@@ -958,7 +992,18 @@
     "notRated": "Not Rated",
     "minScore": "Min Score",
     "maxScore": "Max Score",
-    "unconfirmed": "Unconfirmed"
+    "unconfirmed": "Unconfirmed",
+    "deletingProgress": "Deleting {{completed}}/{{total}} datasets...",
+    "multiTurnGenerateError": "Failed to generate multi-turn conversation dataset",
+    "multiTurnGenerateSuccess": "Multi-turn conversation dataset generated successfully!",
+    "batchDeleteFailed": "Batch delete failed",
+    "batchDeletePartialSuccess": "Batch delete partially succeeded ({{success}} succeeded, {{fail}} failed)",
+    "confirmationStatus": "Confirmation Status",
+    "deleting": "Deleting...",
+    "exporting": "Exporting...",
+    "multiTurnConversations": "Multi-turn Conversations",
+    "noDataToDelete": "No data to delete",
+    "pleaseSelectData": "Please select data first"
   },
   "rating": {
     "veryPoor": "Very Poor",
@@ -1048,7 +1093,8 @@
     "streamingOutput": "Streaming Output",
     "clearConversation": "Clear Conversation",
     "selectModelMax3": "Please select up to 3 models to test",
-    "reasoningProcess": "Reasoning Chain"
+    "reasoningProcess": "Reasoning Chain",
+    "uploadImage": "Upload Image"
   },
   "chunks": {
     "title": "Text Chunk",
@@ -1081,6 +1127,8 @@
     "temperature": "Temperature",
     "maxTokens": "Max Tokens",
     "maxTokensInputTip": "Slider range: 1-{{max}}. You can also input any positive integer.",
+    "maxRetries": "Max Retries",
+    "maxRetriesInputTip": "Slider range: 3-99. You can also input an integer between 3 and 99.",
     "topP": "Top P",
     "type": "Model Type",
     "text": "Large Language Model",
@@ -1102,7 +1150,8 @@
     "healthy": "Healthy",
     "reachable": "Reachable",
     "unhealthy": "Unhealthy",
-    "notChecked": "Not checked"
+    "notChecked": "Not checked",
+    "maxTokensPositiveError": "Max Tokens must be a positive integer"
   },
   "stats": {
     "ongoingProjects": "Ongoing Projects",
@@ -1213,7 +1262,10 @@
     "autoDistillTaskDetail": "Auto Distill Task: {{topic}}",
     "backgroundTaskCreated": "Background distill task created. You can check the progress in the task management center.",
     "backgroundTaskFailed": "Failed to create background task",
-    "taskExecutionError": "Task execution error: {{error}}"
+    "taskExecutionError": "Task execution error: {{error}}",
+    "multiTurnDatasetsProgress": "Multi-turn Progress",
+    "stageBuildingMultiTurnDatasets": "Generating multi-turn conversation datasets...",
+    "startAutoDistillBackground": "Start auto distillation (background)"
   },
   "tasks": {
     "pending": "{{count}} tasks are processing",
@@ -1652,7 +1704,8 @@
         "customFormatRequired": "Please enter custom format",
         "invalidJson": "Invalid JSON format"
       }
-    }
+    },
+    "pendingAnswer": "Pending"
   },
   "monitoring": {
     "title": "Resource Monitoring Dashboard",
@@ -1752,7 +1805,12 @@
       "multiple_choice": "Multiple Choice",
       "short_answer": "Short Answer",
       "open_ended": "Open Ended"
-    }
+    },
+    "answerPlaceholder": "Enter answer...",
+    "deleteSelectedCount": "Delete selected ({{count}})",
+    "moreOptions": "more",
+    "notePlaceholder": "Enter note...",
+    "questionPlaceholder": "Enter question..."
   },
   "evalDatasets": {
     "import": {
@@ -1948,6 +2006,10 @@
     "ties": "Ties",
     "detailResults": "Detailed Results",
     "left": "Left",
-    "right": "Right"
-  }
+    "right": "Right",
+    "noReferenceAnswer": "No reference answer",
+    "referenceAnswer": "Reference Answer",
+    "winner": "Winner"
+  },
+  "status": "unconfirmed"
 }

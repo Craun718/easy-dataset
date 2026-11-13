@@ -28,7 +28,13 @@ if (!fs.existsSync(dotPrismaSrc)) {
   process.exit(0);
 }
 
-// 如果目标已存在且是最新的，跳过
+// Hoisted installs already generate the client in the destination directory.
+if (path.resolve(dotPrismaSrc) === path.resolve(dotPrismaDst)) {
+  console.log('[copy-prisma] Source and destination are the same, skipping...');
+  process.exit(0);
+}
+
+// 如果目标已存在则先移除
 if (fs.existsSync(dotPrismaDst)) {
   console.log('[copy-prisma] Destination already exists, removing old...');
   fs.rmSync(dotPrismaDst, { recursive: true, force: true });

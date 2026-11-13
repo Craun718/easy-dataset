@@ -32,7 +32,7 @@ export default function DatasetContent({ dataset, projectId, onAnswerChange }) {
   useEffect(() => {
     setCurrentAnswer(handleAnswer(dataset));
     setHasChanges(false);
-  }, [dataset.id, dataset.answer]);
+  }, [dataset]);
 
   // 处理答案变化
   const handleAnswerChange = newAnswer => {
@@ -129,18 +129,7 @@ export default function DatasetContent({ dataset, projectId, onAnswerChange }) {
             }}
           >
             {dataset.base64 ? (
-              <img
-                src={dataset.base64}
-                alt={dataset.imageName}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain'
-                }}
-              />
+              <Image src={dataset.base64} alt={dataset.imageName} fill style={{ objectFit: 'contain' }} unoptimized />
             ) : (
               <Image src="/placeholder.png" alt={dataset.imageName} fill style={{ objectFit: 'contain' }} unoptimized />
             )}

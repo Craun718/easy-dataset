@@ -18,6 +18,7 @@ import {
   Alert
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { sortByName } from '@/lib/util/natural-sort';
 
 /**
  * 文本块导出对话框
@@ -38,7 +39,7 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
 
   const needServerExport = chunks.length > 500 || totalCount > 500;
 
-  const handleFormatChange = (event) => {
+  const handleFormatChange = event => {
     setFormat(event.target.value);
   };
 
@@ -50,7 +51,8 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
     try {
       if (!needServerExport) {
         // 小数量：直接客户端导出（快速，无需请求）
-        const exportData = chunks.map(chunk => ({
+        // 导出前按 name 自然排序
+        const exportData = sortByName(chunks).map(chunk => ({
           name: chunk.name,
           fileName: chunk.fileName,
           content: chunk.content,
@@ -177,7 +179,11 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
             <>
               <FormControl fullWidth>
                 <InputLabel>{t('textSplit.selectExportFormat', 'Export Format')}</InputLabel>
-                <Select value={format} onChange={handleFormatChange} label={t('textSplit.selectExportFormat', 'Export Format')}>
+                <Select
+                  value={format}
+                  onChange={handleFormatChange}
+                  label={t('textSplit.selectExportFormat', 'Export Format')}
+                >
                   <MenuItem value="json">JSON</MenuItem>
                   <MenuItem value="jsonl">JSONL</MenuItem>
                 </Select>
@@ -186,16 +192,17 @@ export default function ChunkExportDialog({ open, onClose, projectId, chunks = [
               <Typography variant="body2" color="text.secondary">
                 {needServerExport
                   ? t('textSplit.exportLargeHint', 'Large dataset detected, server-side streaming export will be used')
-                  : t('textSplit.exportSmallHint', '{{count}} chunks will be exported', { count: chunks.length })
-                }
+                  : t('textSplit.exportSmallHint', '{{count}} chunks will be exported', { count: chunks.length })}
               </Typography>
             </>
           ) : (
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, py: 2 }}>
-              <Typography variant="body1">
-                {t('textSplit.exportingData', 'Exporting data...')}
-              </Typography>
-              <LinearProgress variant="determinate" value={progress} sx={{ width: '100%', height: 8, borderRadius: 4 }} />
+              <Typography variant="body1">{t('textSplit.exportingData', 'Exporting data...')}</Typography>
+              <LinearProgress
+                variant="determinate"
+                value={progress}
+                sx={{ width: '100%', height: 8, borderRadius: 4 }}
+              />
               <Typography variant="body2" color="text.secondary">
                 {progress}%
               </Typography>

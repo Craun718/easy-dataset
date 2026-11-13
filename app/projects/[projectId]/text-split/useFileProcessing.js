@@ -77,7 +77,7 @@ export default function useFileProcessing(projectId) {
         toast.error(t('textSplit.pdfProcessingFailed') + error.message || '');
       }
     },
-    [projectId, t, resetProgress, model]
+    [projectId, t, model]
   );
 
   return {

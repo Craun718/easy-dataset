@@ -234,7 +234,7 @@ export default function MarkdownViewDialog({ open, text, onClose, projectId, onS
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h6">{text ? text.fileName : ''}</Typography>
+        <Typography variant="h6" component="span">{text ? text.fileName : ''}</Typography>
         <FormControlLabel
           control={
             <Switch checked={customSplitMode} onChange={e => setCustomSplitMode(e.target.checked)} color="primary" />

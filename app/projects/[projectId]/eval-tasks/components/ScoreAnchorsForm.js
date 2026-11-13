@@ -38,7 +38,7 @@ export default function ScoreAnchorsForm({
     if (!scoreAnchors || scoreAnchors.length === 0) {
       onChange(getDefaultScoreAnchors(questionType, currentLanguage));
     }
-  }, [questionType, currentLanguage]);
+  }, [questionType, currentLanguage, onChange, scoreAnchors]);
 
   // 处理单个规则的描述更改
   const handleDescriptionChange = (index, newDescription) => {

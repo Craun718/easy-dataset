@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'sonner';
@@ -13,27 +13,31 @@ export default function ProjectPage({ params }) {
   const setSelectedModelInfo = useSetAtom(selectedModelInfoAtom);
   const { projectId } = params;
 
+  // 获取模型配置列表
+  const getModelConfigList = useCallback(
+    id => {
+      axios
+        .get(`/api/projects/${id}/model-config`)
+        .then(response => {
+          setConfigList(response.data.data);
+          if (response.data.defaultModelConfigId) {
+            setSelectedModelInfo(response.data.data.find(item => item.id === response.data.defaultModelConfigId));
+          } else {
+            setSelectedModelInfo(null);
+          }
+        })
+        .catch(error => {
+          toast.error('get model list error');
+        });
+    },
+    [setConfigList, setSelectedModelInfo]
+  );
+
   // 默认重定向到文本分割页面
   useEffect(() => {
     getModelConfigList(projectId);
     router.push(`/projects/${projectId}/text-split`);
-  }, [projectId, router]);
-
-  const getModelConfigList = projectId => {
-    axios
-      .get(`/api/projects/${projectId}/model-config`)
-      .then(response => {
-        setConfigList(response.data.data);
-        if (response.data.defaultModelConfigId) {
-          setSelectedModelInfo(response.data.data.find(item => item.id === response.data.defaultModelConfigId));
-        } else {
-          setSelectedModelInfo(null);
-        }
-      })
-      .catch(error => {
-        toast.error('get model list error');
-      });
-  };
+  }, [getModelConfigList, projectId, router]);
 
   return null;
 }

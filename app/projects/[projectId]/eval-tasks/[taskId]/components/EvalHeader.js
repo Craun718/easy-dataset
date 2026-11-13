@@ -3,6 +3,7 @@
 import { Box, Paper, Typography, Chip, Grid, Divider } from '@mui/material';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Image from 'next/image';
 import { detailStyles } from '../detailStyles';
 import { useTranslation } from 'react-i18next';
 import { getModelIcon } from '@/lib/util/modelIcon';
@@ -42,10 +43,12 @@ export default function EvalHeader({ task, stats, filterCorrect, onFilterCorrect
               justifyContent: 'center'
             }}
           >
-            <img
+            <Image
               src={getModelIcon(modelInfo?.modelName || modelInfo?.modelId)}
               alt={modelInfo?.modelId || 'model'}
-              style={{ width: 44, height: 44, objectFit: 'contain' }}
+              width={44}
+              height={44}
+              style={{ objectFit: 'contain' }}
             />
           </Box>
           <Box>

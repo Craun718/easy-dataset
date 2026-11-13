@@ -5,6 +5,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 /**
  * 聊天消息组件
@@ -17,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 export default function ChatMessage({ message, modelName }) {
   const theme = useTheme();
   const { t } = useTranslation();
+  const [showThinking, setShowThinking] = useState(message.showThinking || false);
 
   // 用户消息
   if (message.role === 'user') {
@@ -53,11 +55,12 @@ export default function ChatMessage({ message, modelName }) {
                     );
                   } else if (item.type === 'image_url') {
                     return (
-                      <Box key={i} sx={{ mt: 1, mb: 1 }}>
-                        <img
+                      <Box key={i} sx={{ mt: 1, mb: 1, position: 'relative', width: '100%', height: 'auto' }}>
+                        <Image
                           src={item.image_url.url}
                           alt="上传图片"
-                          style={{ maxWidth: '100%', borderRadius: '4px' }}
+                          fill
+                          style={{ objectFit: 'contain', borderRadius: '4px' }}
                         />
                       </Box>
                     );
@@ -74,7 +77,6 @@ export default function ChatMessage({ message, modelName }) {
   // 助手消息
   if (message.role === 'assistant') {
     // 处理推理过程的展示状态
-    const [showThinking, setShowThinking] = useState(message.showThinking || false);
     const hasThinking = message.thinking && message.thinking.trim().length > 0;
 
     return (
@@ -173,8 +175,13 @@ export default function ChatMessage({ message, modelName }) {
                       return <span key={i}>{item.text}</span>;
                     } else if (item.type === 'image_url') {
                       return (
-                        <Box key={i} sx={{ mt: 1, mb: 1 }}>
-                          <img src={item.image_url.url} alt="图片" style={{ maxWidth: '100%', borderRadius: '4px' }} />
+                        <Box key={i} sx={{ mt: 1, mb: 1, position: 'relative', width: '100%', height: 'auto' }}>
+                          <Image
+                            src={item.image_url.url}
+                            alt="图片"
+                            fill
+                            style={{ objectFit: 'contain', borderRadius: '4px' }}
+                          />
                         </Box>
                       );
                     }

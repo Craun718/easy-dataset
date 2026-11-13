@@ -28,6 +28,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 import { imageStyles } from '../styles/imageStyles';
 
 export default function ImageList({
@@ -150,17 +151,10 @@ export default function ImageList({
                 {/* 预览缩略图 */}
                 <TableCell>
                   <Avatar
+                    variant="rounded"
                     src={image.base64 || image.path}
                     alt={image.imageName}
-                    variant="rounded"
-                    sx={{
-                      width: 48,
-                      height: 48,
-                      cursor: 'pointer',
-                      '&:hover': {
-                        opacity: 0.8
-                      }
-                    }}
+                    sx={{ width: 48, height: 48, cursor: 'pointer' }}
                     onClick={() => setPreviewImage(image)}
                   />
                 </TableCell>
@@ -168,13 +162,13 @@ export default function ImageList({
                 {/* 文件名 */}
                 <TableCell>
                   <Tooltip title={image.imageName}>
-                    <Typography variant="body2" noWrap sx={{ maxWidth: 300 }}>
+                    <Typography variant="body2" noWrap sx={{ maxWidth: 200 }}>
                       {image.imageName}
                     </Typography>
                   </Tooltip>
                 </TableCell>
 
-                {/* 文件大小 */}
+                {/* 大小 */}
                 <TableCell>
                   <Typography variant="body2" color="text.secondary">
                     {formatSize(image.size)}
@@ -291,14 +285,12 @@ export default function ImageList({
         >
           {previewImage && (
             <Box sx={{ width: '100%', textAlign: 'center' }}>
-              <img
+              <Image
                 src={previewImage.base64 || previewImage.path}
                 alt={previewImage.imageName}
-                style={{
-                  maxWidth: '100%',
-                  maxHeight: '90vh',
-                  objectFit: 'contain'
-                }}
+                fill
+                style={{ objectFit: 'contain' }}
+                unoptimized
               />
               <Typography
                 variant="caption"

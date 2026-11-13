@@ -37,7 +37,7 @@ export default function ImageFilters({
 
   useEffect(() => {
     onImageNameChange(debouncedImageName);
-  }, [debouncedImageName]);
+  }, [debouncedImageName, onImageNameChange]);
 
   return (
     <Card sx={imageStyles.filterCard}>

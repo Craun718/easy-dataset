@@ -54,7 +54,7 @@ export default function useEvalDatasets(projectId) {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [keyword]);
+  }, [keyword, debouncedKeyword]);
 
   const fetchDataRef = useRef(null);
   fetchDataRef.current = async (showLoading = true, options = {}) => {

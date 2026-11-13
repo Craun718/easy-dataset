@@ -1,10 +1,12 @@
 {
   "name": "easy-dataset",
-  "version": "1.7.3-ntk-v5",
+  "version": "1.7.3-ntk-v6",
   "private": true,
   "author": {
-    "name": "ConardLi & Ntk & QYD"
+    "name": "ConardLi & Ntk & QYD",
+    "email": "3653544699@qq.com"
   },
+  
   "homepage": "https://github.com/ConardLi/easy-dataset",
   "scripts": {
     "db:studio": "prisma studio",
@@ -19,12 +21,12 @@
     "electron-pack": "electron-builder --dir",
     "electron-dist": "electron-builder",
     "clean-dist": "rm -rf dist",
-    "electron-build": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder -mwl",
-    "electron-build-mac": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --mac",
-    "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --win",
-    "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && electron-builder --linux",
+    "electron-build": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder -mwl",
+    "electron-build-mac": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --mac",
+    "electron-build-win": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && electron-builder --win",
+    "electron-build-linux": "pnpm clean-dist && pnpm db:template && prisma db push && next build && prisma generate && scripts/setup-rpm-wrapper.sh && PATH=\"/tmp/rpmbuild-bin:$PATH\" electron-builder --linux",
     "docker": "docker build -t easy-dataset .",
-    "prettier": "npx prettier --write .",
+    "prettier": "prettier --write .",
     "postinstall": "prisma generate && node scripts/copy-prisma.js"
   },
   "bin": "desktop/server.js",
@@ -67,6 +69,7 @@
     "adm-zip": "^0.6.1",
     "ai": "^4.3.4",
     "axios": "^1.8.4",
+    "electron-build": "^0.0.3",
     "builder-util-runtime": "^9.7.0",
     "client-only": "^0.0.1",
     "color": "^5.0.3",
@@ -76,7 +79,6 @@
     "date-fns": "^4.4.0",
     "debug": "^4.4.3",
     "detect-libc": "^2.1.2",
-    "electron-updater": "^6.8.9",
     "enumify": "^1.0.4",
     "form-data": "^4.0.5",
     "formidable": "^3.5.2",
@@ -135,9 +137,12 @@
     "concurrently": "^8.2.2",
     "electron": "^39.8.10",
     "electron-builder": "^24.13.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.29",
     "husky": "^9.1.7",
     "lint-staged": "15.5.2",
     "pkg": "^5.8.1",
+    "prettier": "^3.9.5",
     "prisma": "^6.6.0",
     "wait-on": "^7.2.0"
   },
@@ -160,29 +165,18 @@
       "node_modules/**/*",
       "!node_modules/.cache/**/*",
       "!node_modules/.bin/**/*",
-      "!node_modules/.vite/**/*"
+      "!**/node_modules/**/.bin/**",
+      "!node_modules/.vite/**/*",
+      "node_modules/.prisma/**/*",
+      "!**/*.{md,d.ts,map}",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
     ],
     "extraResources": [
-      {
-        "from": "prisma/schema.prisma",
-        "to": "prisma/schema.prisma"
-      },
-      {
-        "from": "prisma/template.sqlite",
-        "to": "prisma/template.sqlite"
-      },
-      {
-        "from": "prisma/sql.json",
-        "to": "prisma/sql.json"
-      },
-      {
-        "from": "node_modules/.prisma",
-        "to": "node_modules/.prisma"
-      },
-      {
-        "from": "node_modules/@prisma/client",
-        "to": "node_modules/@prisma/client"
-      }
+      "prisma/**/*",
+      "node_modules/.prisma/**/*",
+      "node_modules/@prisma/client/**/*",
+      "node_modules/@prisma/engines/**/*",
+      "!**/node_modules/**/.bin/**"
     ],
     "directories": {
       "buildResources": "public",
@@ -192,17 +186,18 @@
     "asarUnpack": [
       "**/node_modules/sharp/**/*",
       "**/node_modules/@img/**/*",
-      "**/node_modules/detect-libc/**/*",
-      "**/node_modules/styled-jsx/**/*",
-      "**/node_modules/client-only/**/*",
-      "**/node_modules/@opendocsg/**/*",
-      "**/node_modules/enumify/**/*",
-      "**/node_modules/unpdf/**/*",
-      "**/node_modules/.prisma/**/*",
-      "**/node_modules/@prisma/client/**/*",
-      "**/node_modules/@swc/**/*",
-      "**/node_modules/@next/**/*",
-      "**/node_modules/next/**/*"
+    "**/node_modules/detect-libc/**/*",
+    "**/node_modules/styled-jsx/**/*",
+    "**/node_modules/client-only/**/*",
+    "**/node_modules/@opendocsg/**/*",
+    "**/node_modules/enumify/**/*",
+    "**/node_modules/unpdf/**/*",
+    "**/node_modules/.prisma/**/*",
+    "**/node_modules/@prisma/client/**/*",
+    "**/node_modules/@prisma/engines/**/*",
+    "**/node_modules/@swc/**/*",
+    "**/node_modules/@next/**/*",
+    "**/node_modules/next/**/*"
     ],
     "compression": "maximum",
     "mac": {
@@ -237,6 +232,18 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "perMachine": false
+    },
+    "publish": null
+    ,
+    "linux": {
+      "icon": "public/imgs/logo.png",
+      "category": "Utility",
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "rpm", "arch": ["x64"] }
+      ]
     }
-  }
+  },
+  "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }

@@ -5,17 +5,18 @@ import { getOrCreateUploadFile } from '@/lib/db/chunks';
 
 /**
  * 验证单条 chunk 数据
+ * @returns {{ message: string, stack?: string }[]}
  */
 function validateChunk(item, index) {
   const errors = [];
   if (!item.name || typeof item.name !== 'string') {
-    errors.push(`Item ${index + 1}: missing or invalid "name"`);
+    errors.push({ message: `Item ${index + 1}: missing or invalid "name"` });
   }
   if (!item.fileName || typeof item.fileName !== 'string') {
-    errors.push(`Item ${index + 1}: missing or invalid "fileName"`);
+    errors.push({ message: `Item ${index + 1}: missing or invalid "fileName"` });
   }
   if (!item.content || typeof item.content !== 'string') {
-    errors.push(`Item ${index + 1}: missing or invalid "content"`);
+    errors.push({ message: `Item ${index + 1}: missing or invalid "content"` });
   }
   return errors;
 }
@@ -66,7 +67,11 @@ export async function POST(request, { params }) {
       }
     } catch (parseError) {
       return NextResponse.json(
-        { code: 400, error: `Failed to parse file: ${parseError.message}` },
+        {
+          code: 400,
+          error: `Failed to parse file: ${parseError.message}`,
+          stack: parseError.stack
+        },
         { status: 400 }
       );
     }
@@ -145,7 +150,8 @@ export async function POST(request, { params }) {
       {
         code: 500,
         error: 'Import failed',
-        message: error.message
+        message: error.message,
+        stack: error.stack
       },
       { status: 500 }
     );
